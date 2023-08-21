@@ -1,15 +1,14 @@
-import React from 'react';
+import { cn } from '@/lib/styles';
 import Logo from '../atoms/logo';
 import Menu from './menu';
-import { cn } from '@/lib/styles';
 
 const Sidebar = ({ className }: { className?: string }) => {
-    return (
-        <div className={cn(className, 'flex flex-col')}>
-            <Logo className="m-4 mb-24 p-8 " />
-            <Menu />
-        </div>
-    );
+  return (
+    <div className={cn(className, 'flex flex-col')}>
+      <Logo className="m-4 my-24 p-4 mx-auto" />
+      <Menu />
+    </div>
+  );
 };
 
 export default Sidebar;
