@@ -1,4 +1,4 @@
-# Tauri + React + Typescript
+# Tauri + React + Typescript (cc stream)
 
 This template should help get you started developing with Tauri, React and Typescript in Vite.
 
