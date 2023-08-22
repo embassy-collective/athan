@@ -4,7 +4,7 @@ import Menu from './menu';
 
 const Sidebar = ({ className }: { className?: string }) => {
   return (
-    <div className={cn(className, 'flex flex-col')}>
+    <div className={cn(className, 'flex flex-col bg-foreground')}>
       <Logo className="m-4 my-24 p-4 mx-auto" />
       <Menu />
     </div>

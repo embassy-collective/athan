@@ -1,5 +1,7 @@
 export interface Prayer {
   id: string;
   name: string;
-  time: string;
+  time: Date;
 }
+
+export type PrayerKey = 'fajr' | 'sunrise' | 'dhuhr' | 'asr' | 'maghrib' | 'isha';

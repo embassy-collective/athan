@@ -5,37 +5,37 @@ const routes = [
     name: 'Prayer',
     path: '/',
     icon: 'prayer.svg'
-  },
-  {
-    name: 'Monthly Calendar',
-    path: '/calendar',
-    icon: 'calendar.svg'
-  },
-  {
-    name: 'Quran',
-    path: '/quran',
-    icon: 'quran.svg'
-  },
-  {
-    name: '99 Names',
-    path: '/names',
-    icon: 'names.svg'
-  },
-  {
-    name: 'Adkar',
-    path: '/adkar',
-    icon: 'adkar.svg'
-  },
-  {
-    name: 'Tasbih',
-    path: '/tasbih',
-    icon: 'tasbih.svg'
-  },
-  {
-    name: 'Settings',
-    path: '/settings',
-    icon: 'settings.svg'
   }
+  // {
+  //   name: 'Monthly Calendar',
+  //   path: '/calendar',
+  //   icon: 'calendar.svg'
+  // },
+  // {
+  //   name: 'Quran',
+  //   path: '/quran',
+  //   icon: 'quran.svg'
+  // },
+  // {
+  //   name: '99 Names',
+  //   path: '/names',
+  //   icon: 'names.svg'
+  // },
+  // {
+  //   name: 'Adkar',
+  //   path: '/adkar',
+  //   icon: 'adkar.svg'
+  // },
+  // {
+  //   name: 'Tasbih',
+  //   path: '/tasbih',
+  //   icon: 'tasbih.svg'
+  // },
+  // {
+  //   name: 'Settings',
+  //   path: '/settings',
+  //   icon: 'settings.svg'
+  // }
 ];
 
 const Menu = () => {
