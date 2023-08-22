@@ -15,6 +15,7 @@ module.exports = {
         sans: ['Poppins', 'sans-serif']
       },
       colors: {
+        yellow: '#FFBD00',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

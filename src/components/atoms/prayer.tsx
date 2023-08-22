@@ -1,12 +1,18 @@
+import { useStore } from '@/lib/store';
 import { cn } from '@/lib/styles';
-import { Prayer as PrayerType } from '@/types/prayer';
+import { PrayerKey, Prayer as PrayerType } from '@/types/prayer';
 import { isPermissionGranted, requestPermission, sendNotification } from '@tauri-apps/api/notification';
 import { format } from 'date-fns';
 import SvgIcon from './svg-icon';
 
 const Prayer = ({ prayer, isActive }: { prayer: PrayerType; isActive?: boolean }) => {
+  const { notifications, toggleNotification } = useStore();
+
   const onClick = async () => {
-    console.log('Hello!');
+    // Keep this
+    toggleNotification(prayer.id as PrayerKey);
+
+    // Remove this later
     let permissionGranted = await isPermissionGranted();
 
     if (!permissionGranted) {
@@ -15,15 +21,14 @@ const Prayer = ({ prayer, isActive }: { prayer: PrayerType; isActive?: boolean }
     }
 
     if (permissionGranted) {
-      console.log('Permission granted!');
-      sendNotification('Tauri is awesome!');
-
       sendNotification({
         title: 'Athan time',
         body: `It's time for ${prayer.name} prayer!`
       });
+      // playAthan();
     }
   };
+  const notificationEnabled = notifications[prayer.id as PrayerKey];
 
   return (
     <div
@@ -38,9 +43,28 @@ const Prayer = ({ prayer, isActive }: { prayer: PrayerType; isActive?: boolean }
     >
       <div className="flex justify-between items-center">
         <p>{prayer.name}</p>
-        <SvgIcon iconName={prayer.id} svgProp={{ className: 'w-8 h-8' }} />
+        <SvgIcon
+          iconName={prayer.id}
+          svgProp={{
+            className: cn('w-6 h-6', {
+              'text-white': isActive,
+              'text-yellow': !isActive
+            })
+          }}
+        />
       </div>
-      <p className="font-semibold">{format(prayer.time, 'hh:mm')}</p>
+      <div className="flex justify-between items-center">
+        <p className="font-semibold">{format(prayer.time, 'hh:mm')}</p>
+        <SvgIcon
+          iconName={notificationEnabled ? 'notifs_on' : 'notifs_off'}
+          svgProp={{
+            className: cn('w-6 h-6', {
+              'text-white': notificationEnabled,
+              'text-foreground': !notificationEnabled
+            })
+          }}
+        />
+      </div>
     </div>
   );
 };
