@@ -6,7 +6,7 @@ const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Toaster />
-      <ThemeProvider defaultTheme="dark">{children}</ThemeProvider>
+      <ThemeProvider>{children}</ThemeProvider>
     </>
   );
 };
