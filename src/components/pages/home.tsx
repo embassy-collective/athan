@@ -7,6 +7,7 @@ import Location from '../atoms/location';
 import NextPrayer from '../atoms/next-prayer';
 import Prayers from '../molecules/prayers';
 import Layout from '../templates/layout';
+import { FixType } from '@/types';
 
 const Home = () => {
   const { location } = useStore();
@@ -19,13 +20,17 @@ const Home = () => {
 
   const value = (v: string) => (v === 'none' ? null : v);
 
-  const nextPrayerToday = value(todayPrayerTimes.nextPrayer()) as keyof adhan.PrayerTimes;
-  const nextPrayerTomorrow = value(tomorrowPrayerTimes.nextPrayer()) as keyof adhan.PrayerTimes;
+  const nextPrayerToday = value(todayPrayerTimes.nextPrayer()) as keyof adhan.PrayerTimes | null;
+  let nextPrayerTomorrow = null;
 
-  const nextPrayer = nextPrayerToday || nextPrayerTomorrow;
-  const nextPrayerTime = (
-    nextPrayerToday ? todayPrayerTimes[nextPrayerToday] : tomorrowPrayerTimes[nextPrayerTomorrow]
-  ) as Date;
+  let nextPrayer = nextPrayerToday;
+  let nextPrayerTime: FixType = nextPrayerToday ? todayPrayerTimes[nextPrayerToday] : null;
+
+  if (!nextPrayerTime) {
+    nextPrayerTomorrow = value(tomorrowPrayerTimes.nextPrayer()) as keyof adhan.PrayerTimes;
+    nextPrayer = nextPrayerTomorrow;
+    nextPrayerTime = tomorrowPrayerTimes[nextPrayerTomorrow];
+  }
 
   const allowedKeys = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'];
 
