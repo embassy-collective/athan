@@ -3,7 +3,6 @@ import { PrayerKey } from '@/types/prayer';
 import * as adhan from 'adhan';
 import { format } from 'date-fns';
 import { capitalize } from 'lodash';
-import Location from '../atoms/location';
 import NextPrayer from '../atoms/next-prayer';
 import Prayers from '../molecules/prayers';
 import Layout from '../templates/layout';
@@ -47,12 +46,6 @@ const Home = () => {
           </h1>
           {/* <p className="text-accent">5th Safar, 1445</p> TODO: */}
           <p className="text-accent">{format(today, 'do MMMM, yyyy')}</p>
-        </div>
-        <div>
-          <div className="flex flex-row gap-2 items-center justify-center">
-            <Location />
-            <img src="/images/icons/edit.svg" alt="location" className="w-6 h-6 text-accent" />
-          </div>
         </div>
       </div>
       <Prayers prayers={todayPrayers} className="mt-10" nextPrayer={nextPrayerToday as PrayerKey | null}>

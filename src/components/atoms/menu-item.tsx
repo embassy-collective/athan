@@ -9,7 +9,7 @@ interface MenuItemProps {
   className?: string;
 }
 
-const MenuItem = ({ children, to, key, className }: MenuItemProps) => {
+const MenuItem = ({ children, to, className }: MenuItemProps) => {
   return (
     <NavLink
       to={to}
@@ -19,7 +19,6 @@ const MenuItem = ({ children, to, key, className }: MenuItemProps) => {
           'border-transparent': !isActive
         })
       }
-      key={key}
     >
       {children}
     </NavLink>

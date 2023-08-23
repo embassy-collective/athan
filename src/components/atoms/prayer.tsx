@@ -1,5 +1,6 @@
 import { useStore } from '@/lib/store';
 import { cn } from '@/lib/styles';
+import { useTheme } from '@/providers/theme-provider';
 import { PrayerKey, Prayer as PrayerType } from '@/types/prayer';
 import { isPermissionGranted, requestPermission, sendNotification } from '@tauri-apps/api/notification';
 import { format } from 'date-fns';
@@ -7,8 +8,12 @@ import SvgIcon from './svg-icon';
 
 const Prayer = ({ prayer, isActive }: { prayer: PrayerType; isActive?: boolean }) => {
   const { notifications, toggleNotification } = useStore();
+  const { theme, setTheme } = useTheme();
 
   const onClick = async () => {
+    // Switch theme
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+
     // Keep this
     toggleNotification(prayer.id as PrayerKey);
 
@@ -36,7 +41,7 @@ const Prayer = ({ prayer, isActive }: { prayer: PrayerType; isActive?: boolean }
         'flex flex-col justify-between px-4 py-6 gap-4 bg-accent rounded-[10px] border border-accent text-[20px] hover:cursor-pointer',
         {
           'bg-accent text-white': isActive,
-          'text-white bg-transparent': !isActive
+          'text-primary bg-transparent': !isActive
         }
       )}
       onClick={onClick}

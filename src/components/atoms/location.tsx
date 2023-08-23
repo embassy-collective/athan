@@ -1,4 +1,4 @@
-import { useStore } from '@/lib/store';
+import { GeoLocation } from '@/lib/store';
 import { City, Country } from 'country-state-city';
 import { useEffect, useMemo, useState } from 'react';
 import { Select } from 'react-select-virtualized';
@@ -9,10 +9,17 @@ interface Option {
   label: string;
 }
 
-const Location = () => {
-  const [country, setCountry] = useState('');
-  const [city, setCity] = useState('');
+interface LocationProps {
+  value: GeoLocation;
+  onValueChange: (value: GeoLocation) => void;
+}
+
+const Location = ({ value, onValueChange }: LocationProps) => {
   const countries = Country.getAllCountries();
+  const countryByName = (name: string) => countries.find((c) => c.name === name);
+
+  const [country, setCountry] = useState(countryByName(value.country)?.isoCode ?? '');
+  const [city, setCity] = useState(value.city);
 
   const cities = useMemo(() => {
     if (!country) return [];
@@ -23,17 +30,16 @@ const Location = () => {
     if (!country) return null;
     return countries?.find((c) => c.isoCode === country);
   }, [country, countries]);
+
   const selectedCity = useMemo(() => {
     if (!city) return null;
     return cities?.find((c) => c.name === city);
   }, [city, cities]);
 
-  console.log('selectedCity', selectedCity);
-
-  const { setLocation } = useStore();
   useEffect(() => {
     if (!selectedCity) return;
-    setLocation({
+
+    onValueChange({
       coords: {
         latitude: selectedCity.latitude as unknown as number,
         longitude: selectedCity.longitude as unknown as number
@@ -44,15 +50,15 @@ const Location = () => {
   }, [selectedCity]);
 
   return (
-    <div className="grid grid-cols-2 gap-2">
+    <div className="flex gap-4">
       <Select
-        className="w-60"
+        className="w-56"
         onChange={(value: Option) => setCountry(value.value)}
         options={countries.map((country) => ({ value: country.isoCode, label: country.name }))}
       />
       {country && (
         <Select
-          className="w-60"
+          className="w-56"
           onChange={(value: Option) => setCity(value.value)}
           options={cities?.map((city) => ({ value: city.name, label: city.name }))}
         />
