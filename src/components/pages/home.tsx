@@ -9,7 +9,7 @@ import Layout from '../templates/layout';
 
 const Home = () => {
   const { location } = useStore();
-  const coordinates = new adhan.Coordinates(location.coords.latitude, location.coords.longitude);
+  const coordinates = new adhan.Coordinates(location.coords!.latitude, location.coords!.longitude);
   const params = adhan.CalculationMethod.MuslimWorldLeague();
   const today = new Date();
   const tomorrow = new Date(Date.now() + 86400000);
