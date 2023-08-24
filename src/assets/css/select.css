@@ -1,0 +1,19 @@
+.fast-option {
+    @apply text-primary overflow-hidden !important;
+}
+
+.fast-option:hover {
+    @apply bg-accent !important;
+}
+
+.fast-option-focused {
+   @apply bg-transparent !important;
+}
+
+.fast-option-selected {
+    @apply bg-black !important;
+}
+
+.fast-option-selected:focus {
+    @apply bg-accent !important;
+ }

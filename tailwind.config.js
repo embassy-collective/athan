@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  important: true,
   darkMode: ['class'],
   content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
   theme: {
@@ -15,6 +16,7 @@ module.exports = {
         sans: ['Poppins', 'sans-serif']
       },
       colors: {
+        black: 'hsl(var(--black))',
         yellow: '#FFBD00',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

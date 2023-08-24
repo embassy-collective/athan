@@ -6,12 +6,12 @@ import { persist } from 'zustand/middleware';
 import { AGENTS } from './config/agents';
 
 export interface GeoLocation {
-  coords: {
+  coords?: {
     latitude: number;
     longitude: number;
   };
-  city: string;
-  country: string;
+  city?: string;
+  country?: string;
 }
 
 interface State {
