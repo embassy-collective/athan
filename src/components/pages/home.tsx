@@ -47,8 +47,11 @@ const Home = () => {
               </h1>
             </>
           )}
-          <p className="text-accent">{hijri.replace('AH', '')}</p>
-          <p className="text-accent">{format(today, 'do MMMM, yyyy')}</p>
+        <div>
+          <p className="text-accent  inline">{hijri.replace('AH', '')}</p>
+            <p className='text-accent inline'> / </p>
+            <p className="text-accent inline ">{format(today, 'do MMMM, yyyy')}</p>
+          </div>
         </div>
       </div>
       <Prayers prayers={todayPrayers} className="mt-10" nextPrayer={nextPrayer.isToday ? nextPrayer.prayer : null}>
