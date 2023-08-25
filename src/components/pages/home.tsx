@@ -47,10 +47,10 @@ const Home = () => {
               </h1>
             </>
           )}
-        <div>
-          <p className="text-accent  inline">{hijri.replace('AH', '')}</p>
-            <p className='text-accent inline'> / </p>
-            <p className="text-accent inline ">{format(today, 'do MMMM, yyyy')}</p>
+          <div className="flex gap-2 text-accent">
+            <p>{hijri.replace('AH', '')}</p>
+            <p> / </p>
+            <p>{format(today, 'do MMMM, yyyy')}</p>
           </div>
         </div>
       </div>
