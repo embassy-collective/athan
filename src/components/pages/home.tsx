@@ -16,6 +16,11 @@ const Home = () => {
   const todayPrayerTimes = new adhan.PrayerTimes(coordinates, today, params);
   const tomorrowPrayerTimes = new adhan.PrayerTimes(coordinates, tomorrow, params);
 
+  
+  const myFormat = 'en-u-ca-islamic-umalqura-nu-latn'; // uses islamic-umalqura calendar 
+  const myDate   = new Date(Date.now());  // today's date
+  const hijriDate   = new Intl.DateTimeFormat(myFormat,{dateStyle:'long'}).format(myDate);
+
   const value = (v: string) => (v === 'none' ? null : v);
 
   const nextPrayerToday = value(todayPrayerTimes.nextPrayer()) as keyof adhan.PrayerTimes;
@@ -44,8 +49,11 @@ const Home = () => {
           <h1 className="text-[112px]">
             <span className="font-black capitalize">{nextPrayer}</span> {format(nextPrayerTime, 'hh:mm')}
           </h1>
-          {/* <p className="text-accent">5th Safar, 1445</p> TODO: */}
-          <p className="text-accent">{format(today, 'do MMMM, yyyy')}</p>
+          <div>
+            <p className="text-accent inline ">{hijriDate}</p>
+            <p className='text-accent inline'> / </p>
+            <p className="text-accent inline ">{format(today, 'do MMMM, yyyy')}</p>
+          </div>
         </div>
       </div>
       <Prayers prayers={todayPrayers} className="mt-10" nextPrayer={nextPrayerToday as PrayerKey | null}>
