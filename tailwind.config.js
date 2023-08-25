@@ -13,7 +13,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Poppins', 'sans-serif']
+        sans: ['Poppins', 'sans-serif'],
+        arabic: ['Cairo', 'sans-serif']
       },
       colors: {
         black: 'hsl(var(--black))',

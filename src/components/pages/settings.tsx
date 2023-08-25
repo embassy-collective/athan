@@ -33,7 +33,7 @@ const SettingsForm = () => {
 
   const { toast } = useToast();
   const state = useStore();
-  const { agent, theme, twentyFourHourTime, volume, applySettings, onboarding, setOnboarding } = state;
+  const { agent, gamify, theme, twentyFourHourTime, volume, applySettings, onboarding, setOnboarding } = state;
   const onSubmit = (values: Settings) => {
     applySettings(values);
     toast({
@@ -48,6 +48,7 @@ const SettingsForm = () => {
       ({
         agent,
         theme,
+        gamify,
         time: twentyFourHourTime,
         location: {
           coords: {
@@ -128,6 +129,7 @@ const SettingsForm = () => {
                   <p>24H</p>
                 </div>
               </div>
+
               <div className="flex flex-row gap-4 justify-between">
                 <h2 className="text-xl text-accent">Location</h2>
                 <div className="flex w-1/2 justify-start gap-2">
@@ -135,6 +137,16 @@ const SettingsForm = () => {
                     value={values.location}
                     onValueChange={(value) => setFieldValue('location', value)}
                     errors={errors.location}
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-row gap-4 justify-between">
+                <h2 className="text-xl text-accent">Gamify Tasbih</h2>
+                <div className="flex w-1/2 justify-start gap-2">
+                  <Switch
+                    onCheckedChange={(value: boolean) => setFieldValue('gamify', value)}
+                    checked={values.gamify}
                   />
                 </div>
               </div>

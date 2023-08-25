@@ -28,11 +28,11 @@ const routes = [
   //   path: '/adkar',
   //   icon: 'adkar'
   // },
-  // {
-  //   name: 'Tasbih',
-  //   path: '/tasbih',
-  //   icon: 'tasbih'
-  // },
+  {
+    name: 'Tasbih',
+    path: '/tasbih',
+    icon: 'tasbih'
+  },
   {
     name: 'Settings',
     path: '/settings',

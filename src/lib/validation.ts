@@ -5,6 +5,7 @@ export const settingsSchema = object({
   agent: string().required(),
   theme: string().oneOf(['light', 'dark', 'system']).required(),
   time: boolean().required(), // True = 24h, False = 12h
+  gamify: boolean().default(false),
   location: object({
     coords: object({
       latitude: number().required(),

@@ -22,6 +22,7 @@ interface State {
   twentyFourHourTime: Settings['time'];
   agent: Settings['agent'];
   theme: Settings['theme'];
+  gamify: boolean;
   toggleNotification: (key: PrayerKey) => void;
   setLocation: (location: GeoLocation) => void;
   applySettings: (settings: Settings) => void;
@@ -36,6 +37,7 @@ export const useStore = create<State>()(
       theme: 'system',
       volume: 50,
       twentyFourHourTime: true,
+      gamify: false,
       agent: AGENTS[0].value,
       location: {
         coords: {
@@ -71,7 +73,8 @@ export const useStore = create<State>()(
           twentyFourHourTime: settings.time,
           agent: settings.agent,
           theme: settings.theme,
-          location: settings.location
+          location: settings.location,
+          gamify: settings.gamify
         })),
       setTheme: (theme: Settings['theme']) =>
         set(() => ({
