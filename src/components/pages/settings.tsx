@@ -32,14 +32,14 @@ const SettingsForm = () => {
 
   const { toast } = useToast();
   const state = useStore();
-  const { agent, theme, twentyFourHourTime, volume, applySettings } = state;
+  const { agent, theme, twentyFourHourTime, volume, applySettings, onboarding, setOnboarding } = state;
   const onSubmit = (values: Settings) => {
-    console.log('values', values);
     applySettings(values);
     toast({
       title: 'Settings saved',
       description: 'Your settings have been saved successfully'
     });
+    if (!onboarding) setOnboarding(true);
   };
 
   const initialValues = useMemo(
@@ -71,7 +71,7 @@ const SettingsForm = () => {
               <h2 className="text-xl text-accent">Audio</h2>
 
               <div className="flex flex-row gap-4 justify-between">
-                <p>Volume</p>
+                <p>Volume ({values.volume}%)</p>
                 <Slider
                   defaultValue={[values.volume]}
                   max={100}
@@ -120,9 +120,9 @@ const SettingsForm = () => {
               <div className="flex flex-row gap-4 justify-between">
                 <h2 className="text-xl text-accent">Time</h2>
                 <div className="flex w-1/2 justify-start gap-2">
-                  <p>24H</p>
-                  <Switch onCheckedChange={(value: boolean) => setFieldValue('time', value)} checked={values.time} />
                   <p>AM/PM</p>
+                  <Switch onCheckedChange={(value: boolean) => setFieldValue('time', value)} checked={values.time} />
+                  <p>24H</p>
                 </div>
               </div>
               <div className="flex flex-row gap-4 justify-between">

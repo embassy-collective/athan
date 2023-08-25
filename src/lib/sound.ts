@@ -1,5 +1,4 @@
 export const playAthan = async (volume = 0.4) => {
-  console.log('Play notification');
   try {
     const file = 'audio/nod.mp3';
     const audio = new Audio(file);

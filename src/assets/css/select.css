@@ -3,7 +3,7 @@
 }
 
 .fast-option:hover {
-    @apply bg-accent !important;
+    @apply bg-accent text-foreground !important;
 }
 
 .fast-option-focused {
@@ -15,5 +15,5 @@
 }
 
 .fast-option-selected:focus {
-    @apply bg-accent !important;
+    @apply bg-accent text-foreground !important;
  }
