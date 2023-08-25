@@ -60,8 +60,8 @@ const Prayer = ({ prayer, isActive }: { prayer: PrayerType; isActive?: boolean }
           iconName={notificationEnabled ? 'notifs_on' : 'notifs_off'}
           svgProp={{
             className: cn('w-6 h-6', {
-              'text-white': notificationEnabled,
-              'text-foreground': !notificationEnabled
+              'text-white': notificationEnabled && !isActive,
+              'text-primary': !isActive
             })
           }}
         />
