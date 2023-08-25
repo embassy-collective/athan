@@ -5,6 +5,7 @@ import Layout from '../templates/layout';
 // @ts-ignore
 import { ReactComponent as Mouse } from '@/assets/icons/mouse.svg';
 import { useStore } from '@/lib/store';
+import SvgIcon from '../atoms/svg-icon';
 const BOX_SIZE = 224;
 
 const Tasbih = () => {
@@ -65,9 +66,18 @@ const Tasbih = () => {
     <Layout>
       <div className="flex flex-row mr-20 h-full">
         <div className="flex flex-col gap-8 flex-grow justify-center">
-          <h1 className="text-[48px] text-accent font-semibold" onClick={() => randomize()}>
-            Tasbih
-          </h1>
+          <div className="flex flex-row gap-8 items-center">
+            <h1 className="text-[48px] text-accent font-semibold" onClick={() => randomize()}>
+              Tasbih
+            </h1>
+            <SvgIcon
+              iconName="reset"
+              svgProp={{
+                className: cn('w-8 h-8 cursor-pointer')
+              }}
+              onClick={() => setCounter(0)}
+            />
+          </div>
 
           <h2 className="text-[64px] mx-auto font-arabic font-semibold text-center">
             {thresholds[displayed as keyof typeof thresholds]}
