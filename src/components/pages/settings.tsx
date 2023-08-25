@@ -12,6 +12,7 @@ import PreviewButton from '../atoms/preview-button';
 import { RadioGroup, RadioGroupItem } from '../atoms/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../atoms/select';
 import { Switch } from '../atoms/switch';
+import VolumeLevel from '../atoms/volume-level';
 import Layout from '../templates/layout';
 
 const SettingsForm = () => {
@@ -71,19 +72,21 @@ const SettingsForm = () => {
               <h2 className="text-xl text-accent">Audio</h2>
 
               <div className="flex flex-row gap-4 justify-between">
-                <p>Volume ({values.volume}%)</p>
-                <Slider
-                  defaultValue={[values.volume]}
-                  max={100}
-                  step={1}
-                  className="w-1/2"
-                  onValueChange={(value: number[]) => setFieldValue('volume', value?.[0])}
-                />
+                <p>Volume</p>
+                <div className="flex gap-2 w-1/2">
+                  <Slider
+                    defaultValue={[values.volume]}
+                    max={100}
+                    step={1}
+                    onValueChange={(value: number[]) => setFieldValue('volume', value?.[0])}
+                  />
+                  <VolumeLevel volume={values.volume} />
+                </div>
               </div>
 
               <div className="flex flex-row gap-4 justify-between">
                 <p>Choose your agent</p>
-                <div className="flex  gap-2 w-1/2">
+                <div className="flex gap-2 w-1/2">
                   <Select value={values.agent} onValueChange={(value: string) => setFieldValue('agent', value)}>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="..." />
