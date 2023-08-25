@@ -28,6 +28,12 @@ const Home = () => {
     }
   }, [onboarding]);
 
+  const hijri = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  }).format(today);
+
   return (
     <Layout>
       <div className="flex flex-row">
@@ -41,7 +47,7 @@ const Home = () => {
               </h1>
             </>
           )}
-          {/* <p className="text-accent">5th Safar, 1445</p> TODO: */}
+          <p className="text-accent">{hijri.replace('AH', '')}</p>
           <p className="text-accent">{format(today, 'do MMMM, yyyy')}</p>
         </div>
       </div>
