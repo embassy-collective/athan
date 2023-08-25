@@ -21,7 +21,6 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   const { theme, setTheme } = useStore();
 
-  console.log('Store theme: ', theme);
   useEffect(() => {
     const root = window.document.documentElement;
 

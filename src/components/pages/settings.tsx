@@ -5,13 +5,14 @@ import { useStore } from '@/lib/store';
 import { Settings, settingsSchema } from '@/lib/validation';
 import { Formik } from 'formik';
 import { useMemo } from 'react';
-import { Select } from 'react-select-virtualized';
 import { Button } from '../atoms/button';
 import { Label } from '../atoms/label';
 import Location from '../atoms/location';
 import PreviewButton from '../atoms/preview-button';
 import { RadioGroup, RadioGroupItem } from '../atoms/radio-group';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../atoms/select';
 import { Switch } from '../atoms/switch';
+import VolumeLevel from '../atoms/volume-level';
 import Layout from '../templates/layout';
 
 const SettingsForm = () => {
@@ -32,14 +33,14 @@ const SettingsForm = () => {
 
   const { toast } = useToast();
   const state = useStore();
-  const { agent, theme, twentyFourHourTime, volume, applySettings } = state;
+  const { agent, theme, twentyFourHourTime, volume, applySettings, onboarding, setOnboarding } = state;
   const onSubmit = (values: Settings) => {
-    console.log('values', values);
     applySettings(values);
     toast({
       title: 'Settings saved',
       description: 'Your settings have been saved successfully'
     });
+    if (!onboarding) setOnboarding(true);
   };
 
   const initialValues = useMemo(
@@ -61,44 +62,50 @@ const SettingsForm = () => {
     [agent, twentyFourHourTime, volume]
   );
 
-  console.log('state', state);
-  console.log('initialValues', initialValues);
   return (
     <Layout>
       <div className="flex flex-row mr-20">
         <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={settingsSchema} enableReinitialize>
-          {({ values, setFieldValue, handleSubmit, handleReset }) => (
+          {({ values, setFieldValue, handleSubmit, handleReset, errors }) => (
             <div className="flex flex-col gap-8 flex-grow">
               <h1 className="text-[48px] font-semibold">Settings</h1>
               <h2 className="text-xl text-accent">Audio</h2>
 
               <div className="flex flex-row gap-4 justify-between">
                 <p>Volume</p>
-                <Slider
-                  defaultValue={[values.volume]}
-                  max={100}
-                  step={1}
-                  className="w-1/2"
-                  onValueChange={(value: number[]) => setFieldValue('volume', value?.[0])}
-                />
+                <div className="flex gap-2 w-1/2">
+                  <Slider
+                    defaultValue={[values.volume]}
+                    max={100}
+                    step={1}
+                    onValueChange={(value: number[]) => setFieldValue('volume', value?.[0])}
+                  />
+                  <VolumeLevel volume={values.volume} />
+                </div>
               </div>
 
               <div className="flex flex-row gap-4 justify-between">
                 <p>Choose your agent</p>
-                <div className="flex  gap-2 w-1/2">
-                  <Select
-                    options={AGENTS}
-                    className="w-full"
-                    value={AGENTS.find((a) => a.value === values.agent)}
-                    onChange={(option: { label: string; value: string }) => setFieldValue('agent', option?.value)}
-                  />
+                <div className="flex gap-2 w-1/2">
+                  <Select value={values.agent} onValueChange={(value: string) => setFieldValue('agent', value)}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {AGENTS.map((agent) => (
+                        <SelectItem value={agent.value} key={agent.value}>
+                          {agent.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <PreviewButton agent={values.agent} volume={values.volume} />
                 </div>
               </div>
               <div className="flex flex-row gap-4 justify-between">
                 <h2 className="text-xl text-accent">Theme</h2>
 
-                <div className="flex w-1/2 justify-center">
+                <div className="flex w-1/2 justify-start">
                   <RadioGroup
                     className="flex-row gap-4"
                     value={values.theme}
@@ -115,25 +122,29 @@ const SettingsForm = () => {
               </div>
               <div className="flex flex-row gap-4 justify-between">
                 <h2 className="text-xl text-accent">Time</h2>
-                <div className="flex w-1/2 justify-center gap-2">
-                  <p>24H</p>
-                  <Switch onCheckedChange={(value: boolean) => setFieldValue('time', value)} checked={values.time} />
+                <div className="flex w-1/2 justify-start gap-2">
                   <p>AM/PM</p>
+                  <Switch onCheckedChange={(value: boolean) => setFieldValue('time', value)} checked={values.time} />
+                  <p>24H</p>
                 </div>
               </div>
               <div className="flex flex-row gap-4 justify-between">
                 <h2 className="text-xl text-accent">Location</h2>
-                <div className="flex w-1/2 justify-center gap-2">
-                  <Location value={values.location} onValueChange={(value) => setFieldValue('location', value)} />
+                <div className="flex w-1/2 justify-start gap-2">
+                  <Location
+                    value={values.location}
+                    onValueChange={(value) => setFieldValue('location', value)}
+                    errors={errors.location}
+                  />
                 </div>
               </div>
 
               <div className="flex flex-row gap-4 justify-end w-full">
-                <div className="flex w-1/2 justify-center gap-2">
+                <div className="flex w-1/2 justify-start gap-2">
+                  <Button onClick={() => handleSubmit()}>Save</Button>
                   <Button variant={'link'} onClick={() => handleReset()}>
                     Cancel
                   </Button>
-                  <Button onClick={() => handleSubmit()}>Save</Button>
                 </div>
               </div>
             </div>

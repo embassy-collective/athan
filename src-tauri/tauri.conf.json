@@ -24,7 +24,7 @@
       "dialog": { "message": true },
       "window": {
         "all": false,
-        "close": true,
+        "close": false,
         "hide": true,
         "show": true,
         "maximize": true,

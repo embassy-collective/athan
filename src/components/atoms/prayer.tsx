@@ -1,19 +1,14 @@
+import { formatDate } from '@/lib/date';
 import { useStore } from '@/lib/store';
 import { cn } from '@/lib/styles';
-import { useTheme } from '@/providers/theme-provider';
 import { PrayerKey, Prayer as PrayerType } from '@/types/prayer';
 import { isPermissionGranted, requestPermission, sendNotification } from '@tauri-apps/api/notification';
-import { format } from 'date-fns';
 import SvgIcon from './svg-icon';
 
 const Prayer = ({ prayer, isActive }: { prayer: PrayerType; isActive?: boolean }) => {
-  const { notifications, toggleNotification } = useStore();
-  const { theme, setTheme } = useTheme();
+  const { notifications, toggleNotification, twentyFourHourTime } = useStore();
 
   const onClick = async () => {
-    // Switch theme
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-
     // Keep this
     toggleNotification(prayer.id as PrayerKey);
 
@@ -59,13 +54,14 @@ const Prayer = ({ prayer, isActive }: { prayer: PrayerType; isActive?: boolean }
         />
       </div>
       <div className="flex justify-between items-center">
-        <p className="font-semibold">{format(prayer.time, 'hh:mm')}</p>
+        <p className="font-semibold">{formatDate(prayer.time, twentyFourHourTime)}</p>
+
         <SvgIcon
           iconName={notificationEnabled ? 'notifs_on' : 'notifs_off'}
           svgProp={{
             className: cn('w-6 h-6', {
-              'text-white': notificationEnabled,
-              'text-foreground': !notificationEnabled
+              'text-white': notificationEnabled && !isActive,
+              'text-primary': !isActive
             })
           }}
         />

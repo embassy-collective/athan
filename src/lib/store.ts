@@ -6,15 +6,16 @@ import { persist } from 'zustand/middleware';
 import { AGENTS } from './config/agents';
 
 export interface GeoLocation {
-  coords: {
+  coords?: {
     latitude: number;
     longitude: number;
   };
-  city: string;
-  country: string;
+  city?: string;
+  country?: string;
 }
 
 interface State {
+  onboarding: boolean;
   location: GeoLocation;
   notifications: Record<PrayerKey, boolean>;
   volume: Settings['volume'];
@@ -25,11 +26,13 @@ interface State {
   setLocation: (location: GeoLocation) => void;
   applySettings: (settings: Settings) => void;
   setTheme: (theme: Settings['theme']) => void;
+  setOnboarding: (onboarding: boolean) => void;
 }
 
 export const useStore = create<State>()(
   persist(
     (set) => ({
+      onboarding: false,
       theme: 'system',
       volume: 50,
       twentyFourHourTime: true,
@@ -73,6 +76,10 @@ export const useStore = create<State>()(
       setTheme: (theme: Settings['theme']) =>
         set(() => ({
           theme: theme
+        })),
+      setOnboarding: (onboarding: boolean) =>
+        set(() => ({
+          onboarding: onboarding
         }))
     }),
     {

@@ -1,32 +1,39 @@
 import { cn } from '@/lib/styles';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import SvgIcon from './svg-icon';
 
 const PreviewButton = ({ agent, volume }: { agent: string; volume: number }) => {
-  let timeout: NodeJS.Timeout | undefined = undefined;
   const [playing, setPlaying] = useState(false);
+  const timeout = useRef<NodeJS.Timeout | null>(null);
+  const ref = useRef<HTMLAudioElement | null>(null);
+  const path = `/audio/agents/${agent}.mp3`;
 
   const preview = async () => {
-    if (playing) return;
-    const path = `/audio/agents/${agent}.mp3`;
+    if (ref.current) {
+      await ref.current.pause();
+      setPlaying(false);
+      return;
+    }
 
-    const audio = new Audio(path);
-    audio.volume = volume / 100;
+    ref.current = new Audio(path);
+    ref.current.volume = volume / 100;
 
     setPlaying(true);
-    await audio?.play();
+    await ref.current?.play();
 
-    timeout = setTimeout(() => {
-      audio.pause();
+    timeout.current = setTimeout(() => {
+      if (!ref.current) return;
+      ref.current?.pause();
       setPlaying(false);
     }, 10000);
-
-    useEffect(() => {
-      return () => {
-        clearTimeout(timeout);
-      };
-    }, [timeout]);
   };
+
+  useEffect(() => {
+    return () => {
+      ref.current?.pause();
+      if (timeout.current) clearTimeout(timeout.current);
+    };
+  }, [timeout]);
 
   return (
     <div onClick={() => preview()} className="flex h-full justify-center items-center">
