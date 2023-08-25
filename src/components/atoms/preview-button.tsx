@@ -8,32 +8,37 @@ const PreviewButton = ({ agent, volume }: { agent: string; volume: number }) => 
   const ref = useRef<HTMLAudioElement | null>(null);
   const path = `/audio/agents/${agent}.mp3`;
 
+  const stop = () => {
+    console.log('stop');
+    ref.current?.pause();
+    setPlaying(false);
+    ref.current = null;
+  };
+
   const preview = async () => {
     if (ref.current) {
-      await ref.current.pause();
-      setPlaying(false);
-      return;
+      console.log('Already playing, stop');
+      return stop();
     }
 
     ref.current = new Audio(path);
     ref.current.volume = volume / 100;
 
+    console.log('play');
     setPlaying(true);
     await ref.current?.play();
 
     timeout.current = setTimeout(() => {
-      if (!ref.current) return;
-      ref.current?.pause();
-      setPlaying(false);
-    }, 10000);
+      stop();
+    }, 30000);
   };
 
   useEffect(() => {
     return () => {
-      ref.current?.pause();
+      console.log('unmount');
       if (timeout.current) clearTimeout(timeout.current);
     };
-  }, [timeout]);
+  }, []);
 
   return (
     <div onClick={() => preview()} className="flex h-full justify-center items-center">
