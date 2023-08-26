@@ -36,7 +36,14 @@ const DatePicker = ({ value, onChange, className }: DatePickerProps) => {
           {month} {year}{' '}
         </span>
         {!isSameMonth(date, new Date()) && (
-          <span onClick={() => setDate(new Date())} className="text-xs cursor-pointer text-accent hover:underline">
+          <span
+            onClick={() => {
+              const newDate = new Date();
+              setDate(newDate);
+              onChange(newDate);
+            }}
+            className="text-xs cursor-pointer text-accent hover:underline"
+          >
             Reset
           </span>
         )}
