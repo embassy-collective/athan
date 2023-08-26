@@ -5,7 +5,7 @@ import { AGENTS } from '@/lib/config/agents';
 import { useStore } from '@/lib/store';
 import { Settings, settingsSchema } from '@/lib/validation';
 import { Formik } from 'formik';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Button } from '../components/atoms/button';
 import { Label } from '../components/atoms/label';
 import Location from '../components/atoms/location';
@@ -68,6 +68,15 @@ const SettingsForm = () => {
       }) as Settings,
     [agent, twentyFourHourTime, volume]
   );
+
+  useEffect(() => {
+    if (!onboarding) {
+      toast({
+        title: 'Welcome to Athan Time',
+        description: 'Please configure your location to get started'
+      });
+    }
+  }, [onboarding]);
 
   return (
     <Layout>
