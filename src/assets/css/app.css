@@ -70,7 +70,7 @@
  
 @layer base {
   * {
-    @apply border-border font-sans;
+    @apply font-sans border-border;
   }
   body {
     @apply bg-background text-primary;
