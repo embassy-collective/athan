@@ -7,6 +7,7 @@ import { cn } from '@/lib/styles';
 import { PrayerKey } from '@/types/prayer';
 import { format, isSameDay } from 'date-fns';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../atoms/tooltip';
+import { useTranslation } from 'react-i18next';
 
 interface PrayersTableProps {
   date: Date;
@@ -24,6 +25,7 @@ interface Column {
 }
 
 const PrayersTable = ({ date }: PrayersTableProps) => {
+  const { t } = useTranslation();
   const { prayerTimesByDate } = usePrayerTimes();
   const { twentyFourHourTime } = useStore();
   const columns: Column[] = [
@@ -75,7 +77,7 @@ const PrayersTable = ({ date }: PrayersTableProps) => {
               })}
               key={column.key}
             >
-              {column.label}
+              {t(column.label)}
             </TableHead>
           ))}
         </TableRow>

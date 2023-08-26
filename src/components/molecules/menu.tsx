@@ -1,6 +1,7 @@
 import { cn } from '@/lib/styles';
 import MenuIcon from '../atoms/menu-icon';
 import MenuItem from '../atoms/menu-item';
+import { useTranslation } from 'react-i18next';
 
 const routes = [
   {
@@ -26,6 +27,7 @@ const routes = [
 ];
 
 const Menu = () => {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col">
       <div className="flex flex-col gap-4">
@@ -36,7 +38,7 @@ const Menu = () => {
             className="flex flex-row gap-4 font-bold py-4 px-8 ease-in duration-300"
           >
             <MenuIcon icon={route.icon} className={cn('w-6 h-6 mr-4 ml-8 text-primary')} />
-            {route.name}
+            {t(route.name)}
           </MenuItem>
         ))}
       </div>

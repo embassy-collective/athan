@@ -3,6 +3,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { isSameMonth } from 'date-fns';
 import { useState } from 'react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip';
+import { useTranslation } from 'react-i18next';
 
 interface DatePickerProps {
   value: Date;
@@ -11,6 +12,7 @@ interface DatePickerProps {
 }
 
 const DatePicker = ({ value, onChange, className }: DatePickerProps) => {
+  const { t, i18n } = useTranslation();
   const [date, setDate] = useState<Date>(value);
   const month = date.toLocaleString('default', { month: 'long' });
   const year = date.getFullYear();
@@ -29,6 +31,10 @@ const DatePicker = ({ value, onChange, className }: DatePickerProps) => {
     onChange(newDate);
   };
 
+  const buttonsFlexDir: React.CSSProperties = {
+    flexDirection: i18n.dir() === 'rtl' ? 'row-reverse' : 'row',
+  };
+
   return (
     <div className={cn('flex items-center gap-4', className)}>
       <div className="flex items-center justify-between flex-grow max-w-xs px-4 py-2 border-2 rounded-lg border-accent">
@@ -44,11 +50,11 @@ const DatePicker = ({ value, onChange, className }: DatePickerProps) => {
             }}
             className="text-xs cursor-pointer text-accent hover:underline"
           >
-            Reset
+            {t('Reset')}
           </span>
         )}
       </div>
-      <div className="flex gap-2 font-bold">
+      <div className="flex gap-2 font-bold" style={buttonsFlexDir}>
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger>
@@ -60,7 +66,7 @@ const DatePicker = ({ value, onChange, className }: DatePickerProps) => {
               </div>
             </TooltipTrigger>
             <TooltipContent>
-              <p>Previous month</p>
+              <p>{t('Previous month')}</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -76,7 +82,7 @@ const DatePicker = ({ value, onChange, className }: DatePickerProps) => {
               </div>
             </TooltipTrigger>
             <TooltipContent>
-              <p>Next month</p>
+              <p>{t('Next month')}</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
