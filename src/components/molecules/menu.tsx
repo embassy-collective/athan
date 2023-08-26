@@ -1,6 +1,6 @@
 import { cn } from '@/lib/styles';
+import MenuIcon from '../atoms/menu-icon';
 import MenuItem from '../atoms/menu-item';
-import SvgIcon from '../atoms/svg-icon';
 
 const routes = [
   {
@@ -8,26 +8,11 @@ const routes = [
     path: '/',
     icon: 'prayer'
   },
-  // {
-  //   name: 'Monthly Calendar',
-  //   path: '/calendar',
-  //   icon: 'calendar'
-  // },
-  // {
-  //   name: 'Quran',
-  //   path: '/quran',
-  //   icon: 'quran'
-  // },
-  // {
-  //   name: '99 Names',
-  //   path: '/names',
-  //   icon: 'names'
-  // },
-  // {
-  //   name: 'Adkar',
-  //   path: '/adkar',
-  //   icon: 'adkar'
-  // },
+  {
+    name: 'Monthly Calendar',
+    path: '/calendar',
+    icon: 'calendar'
+  },
   {
     name: 'Tasbih',
     path: '/tasbih',
@@ -50,7 +35,7 @@ const Menu = () => {
             to={route.path}
             className="flex flex-row gap-4 font-bold py-4 px-8 ease-in duration-300"
           >
-            <SvgIcon iconName={route.icon} svgProp={{ className: cn('w-6 h-6 mr-4 ml-8 text-primary') }} />
+            <MenuIcon icon={route.icon} className={cn('w-6 h-6 mr-4 ml-8 text-primary')} />
             {route.name}
           </MenuItem>
         ))}

@@ -1,19 +1,20 @@
+import { Input } from '@/components/atoms/input';
 import { Slider } from '@/components/atoms/slider';
 import { useToast } from '@/hooks/useToast';
 import { AGENTS } from '@/lib/config/agents';
 import { useStore } from '@/lib/store';
 import { Settings, settingsSchema } from '@/lib/validation';
 import { Formik } from 'formik';
-import { useMemo } from 'react';
-import { Button } from '../atoms/button';
-import { Label } from '../atoms/label';
-import Location from '../atoms/location';
-import PreviewButton from '../atoms/preview-button';
-import { RadioGroup, RadioGroupItem } from '../atoms/radio-group';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../atoms/select';
-import { Switch } from '../atoms/switch';
-import VolumeLevel from '../atoms/volume-level';
-import Layout from '../templates/layout';
+import { useEffect, useMemo } from 'react';
+import { Button } from '../components/atoms/button';
+import { Label } from '../components/atoms/label';
+import Location from '../components/atoms/location';
+import PreviewButton from '../components/atoms/preview-button';
+import { RadioGroup, RadioGroupItem } from '../components/atoms/radio-group';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/atoms/select';
+import { Switch } from '../components/atoms/switch';
+import VolumeLevel from '../components/atoms/volume-level';
+import Layout from '../components/templates/layout';
 
 const SettingsForm = () => {
   const themeOptions = [
@@ -32,8 +33,19 @@ const SettingsForm = () => {
   ];
 
   const { toast } = useToast();
-  const state = useStore();
-  const { agent, gamify, theme, twentyFourHourTime, volume, applySettings, onboarding, setOnboarding } = state;
+  const {
+    agent,
+    gamify,
+    theme,
+    twentyFourHourTime,
+    volume,
+    location,
+    applySettings,
+    onboarding,
+    setOnboarding,
+    remindBefore
+  } = useStore();
+
   const onSubmit = (values: Settings) => {
     applySettings(values);
     toast({
@@ -50,31 +62,34 @@ const SettingsForm = () => {
         theme,
         gamify,
         time: twentyFourHourTime,
-        location: {
-          coords: {
-            latitude: 5.3698,
-            longitude: 43.2965
-          },
-          city: 'Marseille',
-          country: 'France'
-        },
-        volume
+        location,
+        volume,
+        remindBefore
       }) as Settings,
     [agent, twentyFourHourTime, volume]
   );
+
+  useEffect(() => {
+    if (!onboarding) {
+      toast({
+        title: 'Welcome to Athan Time',
+        description: 'Please configure your location to get started'
+      });
+    }
+  }, [onboarding]);
 
   return (
     <Layout>
       <div className="flex flex-row mr-20">
         <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={settingsSchema} enableReinitialize>
-          {({ values, setFieldValue, handleSubmit, handleReset, errors }) => (
-            <div className="flex flex-col gap-8 flex-grow">
+          {({ values, setFieldValue, handleSubmit, handleReset, errors, dirty }) => (
+            <div className="flex flex-col flex-grow gap-8">
               <h1 className="text-[48px] font-semibold">Settings</h1>
               <h2 className="text-xl text-accent">Audio</h2>
 
-              <div className="flex flex-row gap-4 justify-between">
+              <div className="flex flex-row justify-between gap-4">
                 <p>Volume</p>
-                <div className="flex gap-2 w-1/2">
+                <div className="flex w-1/2 gap-2">
                   <Slider
                     defaultValue={[values.volume]}
                     max={100}
@@ -85,9 +100,11 @@ const SettingsForm = () => {
                 </div>
               </div>
 
-              <div className="flex flex-row gap-4 justify-between">
-                <p>Choose your agent</p>
-                <div className="flex gap-2 w-1/2">
+              <div className="flex flex-row justify-between gap-4">
+                <p>
+                  Choose your Muezzin (<span className="font-arabic">مُؤَذِّن</span>)
+                </p>
+                <div className="flex w-1/2 gap-2">
                   <Select value={values.agent} onValueChange={(value: string) => setFieldValue('agent', value)}>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="..." />
@@ -103,10 +120,10 @@ const SettingsForm = () => {
                   <PreviewButton agent={values.agent} volume={values.volume} />
                 </div>
               </div>
-              <div className="flex flex-row gap-4 justify-between">
+              <div className="flex flex-row justify-between gap-4">
                 <h2 className="text-xl text-accent">Theme</h2>
 
-                <div className="flex w-1/2 justify-start">
+                <div className="flex justify-start w-1/2">
                   <RadioGroup
                     className="flex-row gap-4"
                     value={values.theme}
@@ -121,18 +138,18 @@ const SettingsForm = () => {
                   </RadioGroup>
                 </div>
               </div>
-              <div className="flex flex-row gap-4 justify-between">
+              <div className="flex flex-row justify-between gap-4">
                 <h2 className="text-xl text-accent">Time</h2>
-                <div className="flex w-1/2 justify-start gap-2">
+                <div className="flex justify-start w-1/2 gap-2">
                   <p>AM/PM</p>
                   <Switch onCheckedChange={(value: boolean) => setFieldValue('time', value)} checked={values.time} />
                   <p>24H</p>
                 </div>
               </div>
 
-              <div className="flex flex-row gap-4 justify-between">
+              <div className="flex flex-row justify-between gap-4">
                 <h2 className="text-xl text-accent">Location</h2>
-                <div className="flex w-1/2 justify-start gap-2">
+                <div className="flex justify-start w-1/2 gap-2">
                   <Location
                     value={values.location}
                     onValueChange={(value) => setFieldValue('location', value)}
@@ -141,9 +158,9 @@ const SettingsForm = () => {
                 </div>
               </div>
 
-              <div className="flex flex-row gap-4 justify-between">
+              <div className="flex flex-row justify-between gap-4">
                 <h2 className="text-xl text-accent">Gamify Tasbih</h2>
-                <div className="flex w-1/2 justify-start gap-2">
+                <div className="flex justify-start w-1/2 gap-2">
                   <Switch
                     onCheckedChange={(value: boolean) => setFieldValue('gamify', value)}
                     checked={values.gamify}
@@ -151,9 +168,29 @@ const SettingsForm = () => {
                 </div>
               </div>
 
-              <div className="flex flex-row gap-4 justify-end w-full">
-                <div className="flex w-1/2 justify-start gap-2">
-                  <Button onClick={() => handleSubmit()}>Save</Button>
+              <div className="flex flex-col gap-4">
+                <h2 className="text-xl text-accent">Reminder</h2>
+                <div className="flex flex-row items-center justify-between gap-4">
+                  <p>How long before the Athan, would you like to be reminded? </p>
+                  <div className="flex flex-col justify-start w-1/2 gap-2">
+                    <Input
+                      type="number"
+                      placeholder="Enter minutes"
+                      value={values.remindBefore ?? 5}
+                      onChange={(e) => setFieldValue('remindBefore', e.target.value)}
+                      min={0}
+                      max={59}
+                    />
+                    {errors.remindBefore && <p className="text-red-500">{errors.remindBefore}</p>}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-row justify-end w-full gap-4">
+                <div className="flex justify-start w-1/2 gap-2">
+                  <Button variant={'default'} onClick={() => handleSubmit()} disabled={!dirty}>
+                    Save
+                  </Button>
                   <Button variant={'link'} onClick={() => handleReset()}>
                     Cancel
                   </Button>

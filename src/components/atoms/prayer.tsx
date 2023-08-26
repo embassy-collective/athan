@@ -1,9 +1,11 @@
+import { ReactComponent as NofityOff } from '@/assets/icons/notifs_off.svg';
+import { ReactComponent as NofityOn } from '@/assets/icons/notifs_on.svg';
 import { formatDate } from '@/lib/date';
 import { useStore } from '@/lib/store';
 import { cn } from '@/lib/styles';
 import { PrayerKey, Prayer as PrayerType } from '@/types/prayer';
 import { isPermissionGranted, requestPermission, sendNotification } from '@tauri-apps/api/notification';
-import SvgIcon from './svg-icon';
+import PrayerIcon from './prayer-icon';
 
 const Prayer = ({ prayer, isActive }: { prayer: PrayerType; isActive?: boolean }) => {
   const { notifications, toggleNotification, twentyFourHourTime } = useStore();
@@ -43,28 +45,31 @@ const Prayer = ({ prayer, isActive }: { prayer: PrayerType; isActive?: boolean }
     >
       <div className="flex justify-between items-center">
         <p>{prayer.name}</p>
-        <SvgIcon
-          iconName={prayer.id}
-          svgProp={{
-            className: cn('w-6 h-6', {
-              'text-white': isActive,
-              'text-yellow': !isActive
-            })
-          }}
+        <PrayerIcon
+          prayer={prayer.id}
+          className={cn('w-6 h-6', {
+            'text-white': isActive,
+            'text-yellow': !isActive
+          })}
         />
       </div>
       <div className="flex justify-between items-center">
         <p className="font-semibold">{formatDate(prayer.time, twentyFourHourTime)}</p>
-
-        <SvgIcon
-          iconName={notificationEnabled ? 'notifs_on' : 'notifs_off'}
-          svgProp={{
-            className: cn('w-6 h-6', {
-              'text-white': notificationEnabled && !isActive,
-              'text-primary': !isActive
-            })
-          }}
-        />
+        {notificationEnabled ? (
+          <NofityOn
+            className={cn('w-6 h-6', {
+              'text-primary': !isActive,
+              'text-white': isActive
+            })}
+          />
+        ) : (
+          <NofityOff
+            className={cn('w-6 h-6 opacity-50', {
+              'text-primary': !isActive,
+              'text-white': isActive
+            })}
+          />
+        )}
       </div>
     </div>
   );

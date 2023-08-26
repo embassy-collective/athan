@@ -13,7 +13,8 @@ export const settingsSchema = object({
     }),
     city: string().required(),
     country: string().required()
-  })
+  }),
+  remindBefore: number().min(0).max(59).default(5)
 });
 
 export type Settings = InferType<typeof settingsSchema>;
