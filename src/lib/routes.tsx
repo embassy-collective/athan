@@ -1,7 +1,8 @@
-import Settings from '@/components/pages/settings';
-import Tasbih from '@/components/pages/tasbih';
+import Calendar from '@/pages/calendar';
+import Settings from '@/pages/settings';
+import Tasbih from '@/pages/tasbih';
 import { createBrowserRouter } from 'react-router-dom';
-import Home from '../components/pages/home';
+import Home from '../pages/home';
 
 const router = createBrowserRouter([
   {
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
   {
     path: '/settings',
     element: <Settings />
+  },
+  {
+    path: '/calendar',
+    element: <Calendar />
   },
   {
     path: '/tasbih',

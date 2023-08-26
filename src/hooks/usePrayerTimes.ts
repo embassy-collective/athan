@@ -21,6 +21,7 @@ const usePrayerTimes = () => {
   const tomorrow = new Date(Date.now() + 86400000);
   const todayPrayerTimes = new adhan.PrayerTimes(coordinates, today, params);
   const tomorrowPrayerTimes = new adhan.PrayerTimes(coordinates, tomorrow, params);
+  const prayerTimesByDate = (date: Date) => new adhan.PrayerTimes(coordinates, date, params);
 
   const value = <ValueType>(v: string) => (v === 'none' ? null : (v as ValueType));
 
@@ -35,7 +36,7 @@ const usePrayerTimes = () => {
 
   const nextPrayer = {
     isToday: nextPrayerToday !== null,
-    time: nextPrayerTime,
+    date: nextPrayerTime,
     prayer: nextPrayerToday || nextPrayerTomorrow
   };
 
@@ -43,7 +44,8 @@ const usePrayerTimes = () => {
     today,
     prayerTimes: todayPrayerTimes,
     tomorrowPrayerTimes: tomorrowPrayerTimes,
-    nextPrayer
+    nextPrayer,
+    prayerTimesByDate
   };
 };
 

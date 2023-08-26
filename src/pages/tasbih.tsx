@@ -1,11 +1,11 @@
+import { ReactComponent as Mouse } from '@/assets/icons/mouse.svg';
+import { useStore } from '@/lib/store';
 import { cn } from '@/lib/styles';
 import { random } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
-import Layout from '../templates/layout';
-// @ts-ignore
-import { ReactComponent as Mouse } from '@/assets/icons/mouse.svg';
-import { useStore } from '@/lib/store';
-import SvgIcon from '../atoms/svg-icon';
+import SvgIcon from '../components/atoms/svg-icon';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../components/atoms/tooltip';
+import Layout from '../components/templates/layout';
 const BOX_SIZE = 224;
 
 const Tasbih = () => {
@@ -64,19 +64,26 @@ const Tasbih = () => {
   const { gamify } = useStore();
   return (
     <Layout>
-      <div className="flex flex-row mr-20 h-full">
-        <div className="flex flex-col gap-8 flex-grow justify-center">
-          <div className="flex flex-row gap-8 items-center">
-            <h1 className="text-[48px] text-accent font-semibold" onClick={() => randomize()}>
-              Tasbih
-            </h1>
-            <SvgIcon
-              iconName="reset"
-              svgProp={{
-                className: cn('w-8 h-8 cursor-pointer')
-              }}
-              onClick={() => setCounter(0)}
-            />
+      <div className="flex flex-row h-full mr-20">
+        <div className="flex flex-col justify-center flex-grow gap-8">
+          <div className="flex flex-row items-center gap-8">
+            <h1 className="text-[48px] text-accent font-semibold">Tasbih</h1>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <SvgIcon
+                    iconName="reset"
+                    svgProp={{
+                      className: cn('w-8 h-8 cursor-pointer text-primary')
+                    }}
+                    onClick={() => setCounter(0)}
+                  />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Reset tasbih</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
 
           <h2 className="text-[64px] mx-auto font-arabic font-semibold text-center">
@@ -84,7 +91,7 @@ const Tasbih = () => {
           </h2>
 
           <div
-            className="w-full h-full relative"
+            className="relative w-full h-full"
             ref={playground}
             onClick={() => {
               setCounter(0);
