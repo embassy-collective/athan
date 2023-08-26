@@ -1,7 +1,7 @@
+import { ReactComponent as PauseIcon } from '@/assets/icons/pause.svg';
+import { ReactComponent as PlayIcon } from '@/assets/icons/play.svg';
 import { cn } from '@/lib/styles';
 import { useEffect, useRef, useState } from 'react';
-import SvgIcon from './svg-icon';
-
 const PreviewButton = ({ agent, volume }: { agent: string; volume: number }) => {
   const [playing, setPlaying] = useState(false);
   const timeout = useRef<NodeJS.Timeout | null>(null);
@@ -9,7 +9,6 @@ const PreviewButton = ({ agent, volume }: { agent: string; volume: number }) => 
   const path = `/audio/agents/${agent}.mp3`;
 
   const stop = () => {
-    console.log('stop');
     ref.current?.pause();
     setPlaying(false);
     ref.current = null;
@@ -24,7 +23,6 @@ const PreviewButton = ({ agent, volume }: { agent: string; volume: number }) => 
     ref.current = new Audio(path);
     ref.current.volume = volume / 100;
 
-    console.log('play');
     setPlaying(true);
     await ref.current?.play();
 
@@ -35,14 +33,13 @@ const PreviewButton = ({ agent, volume }: { agent: string; volume: number }) => 
 
   useEffect(() => {
     return () => {
-      console.log('unmount');
       if (timeout.current) clearTimeout(timeout.current);
     };
   }, []);
 
   return (
-    <div onClick={() => preview()} className="flex h-full justify-center items-center">
-      <SvgIcon iconName={!playing ? 'play' : 'pause'} svgProp={{ className: cn('w-8 h-8') }} />
+    <div onClick={() => preview()} className="flex items-center justify-center h-full">
+      {playing ? <PauseIcon className={cn('w-8 h-8')} /> : <PlayIcon className={cn('w-8 h-8')} />}
     </div>
   );
 };
