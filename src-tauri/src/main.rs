@@ -8,6 +8,11 @@ use window_vibrancy::{apply_blur, apply_vibrancy, NSVisualEffectMaterial};
 use window_shadows::set_shadow;
 use auto_launch::{AutoLaunchBuilder};
 
+#[derive(Clone, serde::Serialize)]
+struct Payload {
+  args: Vec<String>,
+  cwd: String,
+}
 
 fn show_window(app: &tauri::AppHandle) {
   let window = app.get_window("main").unwrap();
@@ -55,6 +60,18 @@ fn main() {
             Ok(())
         })
         .system_tray(system_tray)
+        .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
+            println!("{}, {argv:?}, {cwd}", app.package_info().name);
+
+            let window = app.get_window("main").unwrap();
+            if window.is_minimized().unwrap() {
+                window.maximize().unwrap();
+            } else {
+                show_window(app);
+            }
+            
+            app.emit_all("single-instance", Payload { args: argv, cwd }).unwrap();
+        }))
         .on_system_tray_event(|app, event| match event {
             SystemTrayEvent::LeftClick {  .. } => show_window(app),
             SystemTrayEvent::DoubleClick {  .. } => show_window(app),
