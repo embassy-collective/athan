@@ -23,6 +23,7 @@ interface State {
   agent: Settings['agent'];
   theme: Settings['theme'];
   gamify: boolean;
+  remindBefore: Settings['remindBefore'];
   toggleNotification: (key: PrayerKey) => void;
   setLocation: (location: GeoLocation) => void;
   applySettings: (settings: Settings) => void;
@@ -38,6 +39,7 @@ export const useStore = create<State>()(
       volume: 50,
       twentyFourHourTime: true,
       gamify: false,
+      remindBefore: 5,
       agent: AGENTS[0].value,
       location: {
         coords: {
@@ -74,7 +76,8 @@ export const useStore = create<State>()(
           agent: settings.agent,
           theme: settings.theme,
           location: settings.location,
-          gamify: settings.gamify
+          gamify: settings.gamify,
+          remindBefore: settings.remindBefore
         })),
       setTheme: (theme: Settings['theme']) =>
         set(() => ({

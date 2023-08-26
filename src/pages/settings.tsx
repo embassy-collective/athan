@@ -1,3 +1,4 @@
+import { Input } from '@/components/atoms/input';
 import { Slider } from '@/components/atoms/slider';
 import { useToast } from '@/hooks/useToast';
 import { AGENTS } from '@/lib/config/agents';
@@ -32,9 +33,19 @@ const SettingsForm = () => {
   ];
 
   const { toast } = useToast();
-  const state = useStore();
-  const { agent, gamify, theme, twentyFourHourTime, volume, location, applySettings, onboarding, setOnboarding } =
-    state;
+  const {
+    agent,
+    gamify,
+    theme,
+    twentyFourHourTime,
+    volume,
+    location,
+    applySettings,
+    onboarding,
+    setOnboarding,
+    remindBefore
+  } = useStore();
+
   const onSubmit = (values: Settings) => {
     applySettings(values);
     toast({
@@ -52,7 +63,8 @@ const SettingsForm = () => {
         gamify,
         time: twentyFourHourTime,
         location,
-        volume
+        volume,
+        remindBefore
       }) as Settings,
     [agent, twentyFourHourTime, volume]
   );
@@ -61,7 +73,7 @@ const SettingsForm = () => {
     <Layout>
       <div className="flex flex-row mr-20">
         <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={settingsSchema} enableReinitialize>
-          {({ values, setFieldValue, handleSubmit, handleReset, errors }) => (
+          {({ values, setFieldValue, handleSubmit, handleReset, errors, dirty }) => (
             <div className="flex flex-col flex-grow gap-8">
               <h1 className="text-[48px] font-semibold">Settings</h1>
               <h2 className="text-xl text-accent">Audio</h2>
@@ -147,9 +159,27 @@ const SettingsForm = () => {
                 </div>
               </div>
 
+              <div className="flex flex-col gap-4">
+                <h2 className="text-xl text-accent">Reminder</h2>
+                <div className="flex flex-row items-center justify-between gap-4">
+                  <p>How long before the Athan, would you like to be reminded? </p>
+                  <div className="flex flex-col justify-start w-1/2 gap-2">
+                    <Input
+                      type="number"
+                      placeholder="Enter minutes"
+                      value={values.remindBefore ?? 5}
+                      onChange={(e) => setFieldValue('remindBefore', e.target.value)}
+                      min={0}
+                      max={59}
+                    />
+                    {errors.remindBefore && <p className="text-red-500">{errors.remindBefore}</p>}
+                  </div>
+                </div>
+              </div>
+
               <div className="flex flex-row justify-end w-full gap-4">
                 <div className="flex justify-start w-1/2 gap-2">
-                  <Button variant={'default'} onClick={() => handleSubmit()}>
+                  <Button variant={'default'} onClick={() => handleSubmit()} disabled={!dirty}>
                     Save
                   </Button>
                   <Button variant={'link'} onClick={() => handleReset()}>
