@@ -1,11 +1,13 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use tauri::{
-    CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem, RunEvent, WindowEvent,
+    CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem, RunEvent, WindowEvent, utils::platform::current_exe,
 };
 use window_vibrancy::{apply_blur, apply_vibrancy, NSVisualEffectMaterial};
 
 use window_shadows::set_shadow;
+use auto_launch::{AutoLaunchBuilder};
+
 
 fn show_window(app: &tauri::AppHandle) {
   let window = app.get_window("main").unwrap();
@@ -74,6 +76,24 @@ fn main() {
         .build(tauri::generate_context!())
         .expect("error while running tauri application");
 
+
+    let app_exe = current_exe().unwrap();
+    let app_exe = dunce::canonicalize(app_exe).unwrap();
+    let app_name = app_exe.file_stem().unwrap().to_str().unwrap();
+    let app_path = app_exe.as_os_str().to_str().unwrap();
+    
+    let auto = AutoLaunchBuilder::new()
+        .set_app_name(app_name)
+        .set_app_path(app_path)
+        .set_use_launch_agent(true)
+        .build()
+        .unwrap();
+
+    let already_configured = auto.is_enabled().unwrap();
+
+    if !already_configured {
+        auto.enable().unwrap();
+    }
         
     app.run(|app_handle, event| match event {
         RunEvent::WindowEvent { label, event, .. } => match event {
