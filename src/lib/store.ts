@@ -2,8 +2,9 @@ import { PrayerKey } from '@/types/prayer';
 import { create } from 'zustand';
 import { Settings } from './validation';
 
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 import { AGENTS } from './config/agents';
+import storage from './storage';
 
 export interface GeoLocation {
   coords?: {
@@ -89,7 +90,8 @@ export const useStore = create<State>()(
         }))
     }),
     {
-      name: 'athan-time-storage'
+      name: 'athan-time-storage',
+      storage: createJSONStorage(() => storage)
     }
   )
 );

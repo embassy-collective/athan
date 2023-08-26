@@ -21,6 +21,7 @@ window-shadows = "0.2.1"
 sentry-tauri = "0.2.0"
 auto-launch = "0.4.0"
 dunce = "1.0.4"
+tauri-plugin-store = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem

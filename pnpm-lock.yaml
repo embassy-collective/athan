@@ -43,6 +43,9 @@ dependencies:
   '@tauri-apps/api':
     specifier: ^1.4.0
     version: 1.4.0
+  '@tauri-apps/plugin-store':
+    specifier: 2.0.0-alpha.1
+    version: 2.0.0-alpha.1
   adhan:
     specifier: ^4.4.3
     version: 4.4.3
@@ -1683,6 +1686,11 @@ packages:
     engines: {node: '>= 14.6.0', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
     dev: false
 
+  /@tauri-apps/api@2.0.0-alpha.6:
+    resolution: {integrity: sha512-ZMOc3eu9amwvkC6M69h3hWt4/EsFaAXmtkiw4xd2LN59/lTb4ZQiVfq2QKlRcu1rj3n/Tcr7U30ZopvHwXBGIg==}
+    engines: {node: '>= 14.6.0', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
+    dev: false
+
   /@tauri-apps/cli-darwin-arm64@1.4.0:
     resolution: {integrity: sha512-nA/ml0SfUt6/CYLVbHmT500Y+ijqsuv5+s9EBnVXYSLVg9kbPUZJJHluEYK+xKuOj6xzyuT/+rZFMRapmJD3jQ==}
     engines: {node: '>= 10'}
@@ -1789,6 +1797,12 @@ packages:
       '@tauri-apps/cli-win32-ia32-msvc': 1.4.0
       '@tauri-apps/cli-win32-x64-msvc': 1.4.0
     dev: true
+
+  /@tauri-apps/plugin-store@2.0.0-alpha.1:
+    resolution: {integrity: sha512-rchpcLw9H2Q+hXOTW5HVrUrQupcK6LJ81vY1Y/OAaSu+XwvK25gE1f3ILAMNwTnhTbBzCqbuK0y1m51Kb+ALmA==}
+    dependencies:
+      '@tauri-apps/api': 2.0.0-alpha.6
+    dev: false
 
   /@total-typescript/ts-reset@0.5.1:
     resolution: {integrity: sha512-AqlrT8YA1o7Ff5wPfMOL0pvL+1X+sw60NN6CcOCqs658emD6RfiXhF7Gu9QcfKBH7ELY2nInLhKSCWVoNL70MQ==}

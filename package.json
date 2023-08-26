@@ -21,6 +21,7 @@
     "@radix-ui/react-toast": "^1.1.4",
     "@radix-ui/react-tooltip": "^1.0.6",
     "@tauri-apps/api": "^1.4.0",
+    "@tauri-apps/plugin-store": "2.0.0-alpha.1",
     "adhan": "^4.4.3",
     "class-variance-authority": "^0.7.0",
     "country-state-city": "^3.2.0",

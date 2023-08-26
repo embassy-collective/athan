@@ -72,6 +72,7 @@ fn main() {
             _ => {}
         })
         .plugin(sentry_tauri::plugin())
+        .plugin(tauri_plugin_store::Builder::default().build())
         .invoke_handler(tauri::generate_handler![])
         .build(tauri::generate_context!())
         .expect("error while running tauri application");
