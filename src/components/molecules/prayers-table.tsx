@@ -15,6 +15,7 @@ interface PrayersTableProps {
 
 export type TableEntry = {
   originalDate: Date;
+  dateAr: string; // .
   date: string; // Date as 01 Tue, 02 Wed, etc.
   isActive?: boolean;
 } & Record<PrayerKey, string>;
@@ -32,6 +33,13 @@ const PrayersTable = ({ date }: PrayersTableProps) => {
     {
       label: date.toLocaleString(i18n.language === 'ar' ? 'ar-Ma' : 'default', { month: 'long' }),
       key: 'date'
+    },
+    {
+      label: date.toLocaleString(
+        i18n.language === 'ar' ? 'ar-u-ca-islamic-umalqura-nu-latn' : 'en-u-ca-islamic-umalqura-nu-latn',
+        { month: 'long' }
+      ),
+      key: 'dateAr'
     },
     ...PRAYERS.map((prayer) => ({
       label: prayer,
@@ -54,6 +62,7 @@ const PrayersTable = ({ date }: PrayersTableProps) => {
     const row: TableEntry = {
       originalDate: rowDate,
       date: dateLabel,
+      dateAr: rowDate.toLocaleString('en-u-ca-islamic-umalqura-nu-latn', { day: '2-digit' }),
       ...PRAYERS.reduce(
         (acc, prayer) => {
           acc[prayer] = formatDate(times[prayer], twentyFourHourTime);
@@ -66,8 +75,6 @@ const PrayersTable = ({ date }: PrayersTableProps) => {
 
     return row;
   });
-
-  console.log(rows);
 
   return (
     <Table>

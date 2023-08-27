@@ -16,7 +16,6 @@ const PreviewButton = ({ agent, volume }: { agent: string; volume: number }) => 
 
   const preview = async () => {
     if (ref.current) {
-      console.log('Already playing, stop');
       return stop();
     }
 

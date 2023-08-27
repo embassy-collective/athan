@@ -222,14 +222,18 @@ const SettingsForm = () => {
                 <div className="flex flex-row items-center justify-between gap-4">
                   <p className=" rtl:font-arabic">{t('How long before the Athan, would you like to be reminded?')}</p>
                   <div className="flex flex-col justify-start w-1/2 gap-2">
-                    <Input
-                      type="number"
-                      placeholder="Enter minutes"
-                      value={values.remindBefore ?? 5}
-                      onChange={(e) => setFieldValue('remindBefore', e.target.value)}
-                      min={0}
-                      max={59}
-                    />
+                    <div className="flex items-center gap-2">
+                      <Input
+                        type="number"
+                        className="w-24 text-xl font-bold"
+                        placeholder="Enter minutes"
+                        value={values.remindBefore ?? 5}
+                        onChange={(e) => setFieldValue('remindBefore', e.target.value)}
+                        min={0}
+                        max={59}
+                      />
+                      <span className="font-arabic">{t('min')}</span>
+                    </div>
                     {errors.remindBefore && <p className="text-red-500">{errors.remindBefore}</p>}
                   </div>
                 </div>
