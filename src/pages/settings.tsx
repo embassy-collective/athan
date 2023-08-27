@@ -5,18 +5,18 @@ import { AGENTS } from '@/lib/config/agents';
 import { useStore } from '@/lib/store';
 import { Settings, settingsSchema } from '@/lib/validation';
 import { Formik } from 'formik';
-import { useMemo, useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '../components/atoms/button';
 import { Label } from '../components/atoms/label';
-import Location from '../components/atoms/location';
 import LanguageSelector from '../components/atoms/language-selector';
+import Location from '../components/atoms/location';
 import PreviewButton from '../components/atoms/preview-button';
 import { RadioGroup, RadioGroupItem } from '../components/atoms/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/atoms/select';
 import { Switch } from '../components/atoms/switch';
 import VolumeLevel from '../components/atoms/volume-level';
 import Layout from '../components/templates/layout';
-import { useTranslation } from 'react-i18next';
 
 const SettingsForm = () => {
   const { t, i18n } = useTranslation();
@@ -50,10 +50,10 @@ const SettingsForm = () => {
     remindBefore
   } = useStore();
 
-  const changeLanguage = (lng : string) => { 
-    i18n.changeLanguage(lng)
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
     document.body.dir = i18n.dir();
-  }
+  };
 
   const onSubmit = (values: Settings) => {
     applySettings(values);
@@ -95,11 +95,11 @@ const SettingsForm = () => {
         <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={settingsSchema} enableReinitialize>
           {({ values, setFieldValue, handleSubmit, handleReset, errors, dirty }) => (
             <div className="flex flex-col flex-grow gap-8">
-              <h1 className="text-[48px] font-semibold">{t('Settings')}</h1>
-              <h2 className="text-xl text-accent">{t('Audio')}</h2>
+              <h1 className="text-[48px] font-semibold  rtl:font-arabic">{t('Settings')}</h1>
+              <h2 className="text-xl text-accent rtl:font-arabic">{t('Audio')}</h2>
 
               <div className="flex flex-row justify-between gap-4">
-                <p>{t('Volume')}</p>
+                <p className=" rtl:font-arabic">{t('Volume')}</p>
                 <div className="flex w-1/2 gap-2">
                   <Slider
                     defaultValue={[values.volume]}
@@ -112,8 +112,8 @@ const SettingsForm = () => {
               </div>
 
               <div className="flex flex-row justify-between gap-4">
-                <p>
-                {t('Choose your Muezzin')} {values.language === 'en' && <span className="font-arabic">(مُؤَذِّن)</span>}
+                <p className=" rtl:font-arabic">
+                  {t('Choose your Muezzin')} {i18n.language === 'en' && <span className="font-arabic">(مُؤَذِّن)</span>}
                 </p>
                 <div className="flex w-1/2 gap-2">
                   <Select value={values.agent} onValueChange={(value: string) => setFieldValue('agent', value)}>
@@ -132,7 +132,7 @@ const SettingsForm = () => {
                 </div>
               </div>
               <div className="flex flex-row justify-between gap-4">
-                <h2 className="text-xl text-accent">{t('Theme')}</h2>
+                <h2 className="text-xl text-accent rtl:font-arabic">{t('Theme')}</h2>
 
                 <div className="flex justify-start w-1/2">
                   <RadioGroup
@@ -151,7 +151,7 @@ const SettingsForm = () => {
               </div>
 
               <div className="flex flex-row justify-between gap-4">
-                <h2 className="text-xl text-accent">{t('Language')}</h2>
+                <h2 className="text-xl text-accent rtl:font-arabic">{t('Language')}</h2>
                 <div className="flex justify-start w-1/2 gap-2">
                   <LanguageSelector
                     value={values.language}
@@ -161,7 +161,7 @@ const SettingsForm = () => {
               </div>
 
               <div className="flex flex-row justify-between gap-4">
-                <h2 className="text-xl text-accent">{t('Time')}</h2>
+                <h2 className="text-xl text-accent rtl:font-arabic">{t('Time')}</h2>
                 <div className="flex justify-start w-1/2 gap-2">
                   <p>AM/PM</p>
                   <Switch onCheckedChange={(value: boolean) => setFieldValue('time', value)} checked={values.time} />
@@ -170,7 +170,7 @@ const SettingsForm = () => {
               </div>
 
               <div className="flex flex-row justify-between gap-4">
-                <h2 className="text-xl text-accent">{t('Location')}</h2>
+                <h2 className="text-xl text-accent rtl:font-arabic">{t('Location')}</h2>
                 <div className="flex justify-start w-1/2 gap-2">
                   <Location
                     value={values.location}
@@ -181,7 +181,7 @@ const SettingsForm = () => {
               </div>
 
               <div className="flex flex-row justify-between gap-4">
-                <h2 className="text-xl text-accent">{t('Gamify Tasbih')}</h2>
+                <h2 className="text-xl text-accent rtl:font-arabic">{t('Gamify Tasbih')}</h2>
                 <div className="flex justify-start w-1/2 gap-2">
                   <Switch
                     onCheckedChange={(value: boolean) => setFieldValue('gamify', value)}
@@ -191,9 +191,9 @@ const SettingsForm = () => {
               </div>
 
               <div className="flex flex-col gap-4">
-                <h2 className="text-xl text-accent">{t('Reminder')}</h2>
+                <h2 className="text-xl text-accent rtl:font-arabic">{t('Reminder')}</h2>
                 <div className="flex flex-row items-center justify-between gap-4">
-                  <p>{t('How long before the Athan, would you like to be reminded?')}</p>
+                  <p className=" rtl:font-arabic">{t('How long before the Athan, would you like to be reminded?')}</p>
                   <div className="flex flex-col justify-start w-1/2 gap-2">
                     <Input
                       type="number"

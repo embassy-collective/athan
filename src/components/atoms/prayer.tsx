@@ -5,8 +5,8 @@ import { useStore } from '@/lib/store';
 import { cn } from '@/lib/styles';
 import { PrayerKey, Prayer as PrayerType } from '@/types/prayer';
 import { isPermissionGranted, requestPermission, sendNotification } from '@tauri-apps/api/notification';
-import PrayerIcon from './prayer-icon';
 import { useTranslation } from 'react-i18next';
+import PrayerIcon from './prayer-icon';
 
 const Prayer = ({ prayer, isActive }: { prayer: PrayerType; isActive?: boolean }) => {
   const { t } = useTranslation();
@@ -45,8 +45,8 @@ const Prayer = ({ prayer, isActive }: { prayer: PrayerType; isActive?: boolean }
       )}
       onClick={onClick}
     >
-      <div className="flex justify-between items-center">
-        <p>{t(prayer.name)}</p>
+      <div className="flex items-center justify-between">
+        <p className="rtl:font-arabic">{t(prayer.name)}</p>
         <PrayerIcon
           prayer={prayer.id}
           className={cn('w-6 h-6', {
@@ -55,7 +55,7 @@ const Prayer = ({ prayer, isActive }: { prayer: PrayerType; isActive?: boolean }
           })}
         />
       </div>
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <p className="font-semibold">{formatDate(prayer.time, twentyFourHourTime)}</p>
         {notificationEnabled ? (
           <NofityOn

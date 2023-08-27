@@ -6,11 +6,11 @@ import { PrayerKey } from '@/types/prayer';
 import { format } from 'date-fns';
 import { capitalize } from 'lodash';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import NextPrayer from '../components/atoms/next-prayer';
 import Prayers from '../components/molecules/prayers';
 import Layout from '../components/templates/layout';
-import { useTranslation } from 'react-i18next';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -45,7 +45,7 @@ const Home = () => {
             <>
               <NextPrayer nextPrayerTime={nextPrayer.date} />
               <h1 className="text-[112px]">
-                <span className="font-black capitalize">{t(nextPrayer.prayer as string)}</span>{' '}
+                <span className="font-black capitalize rtl:font-arabic">{t(nextPrayer.prayer as string)}</span>{' '}
                 {formatDate(nextPrayer.date, twentyFourHourTime)}
               </h1>
             </>

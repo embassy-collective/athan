@@ -6,8 +6,8 @@ import { useStore } from '@/lib/store';
 import { cn } from '@/lib/styles';
 import { PrayerKey } from '@/types/prayer';
 import { format, isSameDay } from 'date-fns';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../atoms/tooltip';
 import { useTranslation } from 'react-i18next';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../atoms/tooltip';
 
 interface PrayersTableProps {
   date: Date;
@@ -25,12 +25,12 @@ interface Column {
 }
 
 const PrayersTable = ({ date }: PrayersTableProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { prayerTimesByDate } = usePrayerTimes();
   const { twentyFourHourTime } = useStore();
   const columns: Column[] = [
     {
-      label: date.toLocaleString('default', { month: 'long' }),
+      label: date.toLocaleString(i18n.language === 'ar' ? 'ar-Ma' : 'default', { month: 'long' }),
       key: 'date'
     },
     ...PRAYERS.map((prayer) => ({
@@ -46,7 +46,10 @@ const PrayersTable = ({ date }: PrayersTableProps) => {
 
   const rows = daysOfTheMonth.map((day) => {
     const rowDate = new Date(date.getFullYear(), date.getMonth(), day);
-    const dateLabel = rowDate.toLocaleString('default', { day: '2-digit', weekday: 'short' });
+    const dateLabel = rowDate.toLocaleString(i18n.language === 'ar' ? 'ar-Ma' : 'default', {
+      day: '2-digit',
+      weekday: 'short'
+    });
     const times = prayerTimesByDate(date);
     const row: TableEntry = {
       originalDate: rowDate,
@@ -72,7 +75,7 @@ const PrayersTable = ({ date }: PrayersTableProps) => {
         <TableRow className="">
           {columns.map((column, i) => (
             <TableHead
-              className={cn('px-4 capitalize bg-black text-accent', {
+              className={cn('px-4 capitalize bg-black text-accent rtl:font-arabic', {
                 'w-48': i === 0
               })}
               key={column.key}
@@ -91,7 +94,7 @@ const PrayersTable = ({ date }: PrayersTableProps) => {
             })}
           >
             {columns.map((column) => (
-              <TableCell className="px-4" key={column.key}>
+              <TableCell className="px-4 rtl:font-arabic" key={column.key}>
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger>{row[column.key] as string}</TooltipTrigger>

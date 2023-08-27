@@ -26,7 +26,7 @@ const NextPrayer = ({ nextPrayerTime }: { nextPrayerTime: Date }) => {
   });
 
   return (
-    <h2 className="font-light text-3xl">
+    <h2 className="text-3xl font-light rtl:font-arabic">
       {t('Next prayer in')} <span className="text-accent">{countdown}</span>
     </h2>
   );
