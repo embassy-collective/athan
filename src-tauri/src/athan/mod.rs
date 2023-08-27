@@ -1,6 +1,7 @@
+use chrono::{Date, Local, NaiveDateTime};
+use islam::salah::{Config, Madhab, Method, PrayerSchedule};
 use log::debug;
 use playback_rs::{Player, Song};
-use salah::prelude::{Configuration, Coordinates, Madhab, Method, PrayerSchedule, Utc};
 use serde::Deserialize;
 use std::path::PathBuf;
 use std::sync::Arc;
@@ -11,8 +12,8 @@ use tokio::sync::Mutex;
 
 #[derive(Deserialize, Debug)]
 pub(crate) struct Coords {
-    pub(crate) latitude: f64,
-    pub(crate) longitude: f64,
+    pub(crate) latitude: f32,
+    pub(crate) longitude: f32,
 }
 #[derive(Deserialize, Debug)]
 pub(crate) struct Location {
@@ -34,7 +35,7 @@ pub(crate) struct AthanSettings {
     pub(crate) agent: String,
     pub(crate) location: Location,
     pub(crate) notifications: Notifications,
-    pub(crate) remindBefore: u32,
+    pub(crate) remindBefore: String,
 }
 #[derive(Deserialize, Debug)]
 pub(crate) struct State {
@@ -65,50 +66,45 @@ pub fn check_athan_time(store: &mut Store<Wry>, resources_path: PathBuf) {
     let parsed_state: State = serde_json::from_str(state.as_str().unwrap()).unwrap();
 
     // Get current location from the storage
-    let location = Coordinates::new(
+    let location = islam::salah::Location::new(
         parsed_state.state.location.coords.latitude,
         parsed_state.state.location.coords.longitude,
     );
 
     // Get prayer times for the given location
-    let prayers = PrayerSchedule::new()
-        .on(Utc::today())
-        .for_location(location)
-        .with_configuration(Configuration::with(
-            Method::MuslimWorldLeague,
-            Madhab::Shafi,
-        ))
+    let prayers = PrayerSchedule::new(location)
+        .expect("Failed to create prayer schedule.")
+        .on(Local::now().date_naive())
+        .with_config(Config::new().with(Method::MuslimWorldLeague, Madhab::Shafi))
         .calculate()
         .expect("Failed to calculate prayer times.");
 
     // Get the next prayer time and the time left to it
-    let next_prayer = prayers.next();
+    let next_prayer = prayers.next().expect("Failed to fetch next prayer!");
 
     // Check if notifications are enabled for the next prayer
     let notifications = parsed_state.state.notifications;
     let mut notify = false;
 
     match next_prayer {
-        salah::prelude::Prayer::Fajr => {
+        islam::salah::Prayer::Fajr => {
             notify = notifications.fajr;
         }
-        salah::prelude::Prayer::Sunrise => {
+        islam::salah::Prayer::Sherook => {
             notify = notifications.sunrise;
         }
-        salah::prelude::Prayer::Dhuhr => {
+        islam::salah::Prayer::Dohr => {
             notify = notifications.dhuhr;
         }
-        salah::prelude::Prayer::Asr => {
+        islam::salah::Prayer::Asr => {
             notify = notifications.asr;
         }
-        salah::prelude::Prayer::Maghrib => {
+        islam::salah::Prayer::Maghreb => {
             notify = notifications.maghrib;
         }
-        salah::prelude::Prayer::Isha => {
+        islam::salah::Prayer::Ishaa => {
             notify = notifications.isha;
         }
-        salah::Prayer::Qiyam => {}
-        salah::Prayer::FajrTomorrow => {}
     }
 
     if !notify {
@@ -116,16 +112,14 @@ pub fn check_athan_time(store: &mut Store<Wry>, resources_path: PathBuf) {
         return;
     }
 
-    let (hours_left, minutes_left) = prayers.time_remaining();
+    let (hours_left, minutes_left) = prayers.time_remaining().unwrap();
 
     debug!(
-        "Next prayer: {}, Time left: {} hours and {} minutes",
-        next_prayer.name(),
-        hours_left,
-        minutes_left
+        "Time left: {} hours and {} minutes",
+        hours_left, minutes_left
     );
     debug!("Remind before: {}", parsed_state.state.remindBefore);
-    let remind_bar_before = parsed_state.state.remindBefore;
+    let remind_bar_before = parsed_state.state.remindBefore.parse::<u32>().unwrap();
 
     let time_remaining = minutes_left.abs_diff(remind_bar_before);
     debug!("Time left before remind: {}", time_remaining);
@@ -133,11 +127,11 @@ pub fn check_athan_time(store: &mut Store<Wry>, resources_path: PathBuf) {
     // Every minute, check if the current time is one of the prayer times
 
     if hours_left == 0 && time_remaining <= 1 {
-        debug!("Time for {}", next_prayer.name());
+        debug!("Time for {}", next_prayer.name().unwrap());
 
         Notification::new("net.thembassy.athan")
             .title("Athan Time")
-            .body(format!("It's time for {}", next_prayer.name()))
+            .body(format!("It's time for {}", next_prayer.name().unwrap()))
             .show()
             .expect("Failed to show notification.");
 

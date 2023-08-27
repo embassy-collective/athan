@@ -219,9 +219,9 @@ dependencies = [
  "auto-launch",
  "chrono",
  "dunce",
+ "islam",
  "log",
  "playback-rs",
- "salah",
  "sentry-tauri",
  "serde",
  "serde_json",
@@ -2015,6 +2015,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "28b29a3cd74f0f4598934efe3aeba42bae0eb4680554128851ebbecb02af14e6"
 
 [[package]]
+name = "islam"
+version = "2.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "01a3bfacaf92a15dbc6f75d9ac60f0f5b08f9ba8cbfdb437cc667ecb5d53ea7d"
+dependencies = [
+ "chrono",
+ "thiserror",
+]
+
+[[package]]
 name = "itoa"
 version = "0.4.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3520,15 +3530,6 @@ name = "safemem"
 version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ef703b7cb59335eae2eb93ceb664c0eb7ea6bf567079d843e09420219668e072"
-
-[[package]]
-name = "salah"
-version = "0.7.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1908dd2458b35b439d2479bd9792ff307423a0e65f66dd10fd4830eafb671309"
-dependencies = [
- "chrono",
-]
 
 [[package]]
 name = "same-file"

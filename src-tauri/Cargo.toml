@@ -35,11 +35,11 @@ dunce = "1.0.4"
 tauri-plugin-store = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 log = "0.4.20"
 tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "dev" }
-salah = "0.7.0"
-chrono = "0.4.26"
+chrono = "0.4.6"
 tokio = { version = "1.32.0", features = ["full"] }
 tokio-timer = "0.2.13"
 playback-rs = "0.4.3"
+islam = "2.0.0"
 
 
 [features]
