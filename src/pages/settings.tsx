@@ -20,6 +20,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Switch } from '../components/atoms/switch';
 import VolumeLevel from '../components/atoms/volume-level';
 import Layout from '../components/templates/layout';
+import '../assets/css/settings.css';
 
 const SettingsForm = () => {
   const { setPreviewTheme } = useTheme();
