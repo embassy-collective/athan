@@ -1,19 +1,29 @@
 [package]
 name = "athan-time"
 version = "0.0.0"
-description = "A Tauri App"
+description = "An athan reminder app"
 authors = ["you"]
-license = ""
-repository = ""
+license = "MIT"
+repository = "https://github.com/The-Embassy-Collective/athan"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
 tauri-build = { version = "1.4", features = [] }
 
 [dependencies]
-tauri = { version = "1.4", features = [ "system-tray", "dialog-message", "notification-all", "window-unmaximize", "window-show", "window-unminimize", "window-minimize", "window-maximize", "window-hide", "window-start-dragging", "shell-open"] }
+tauri = { version = "1.4", features = [
+    "system-tray",
+    "dialog-message",
+    "notification-all",
+    "window-unmaximize",
+    "window-show",
+    "window-unminimize",
+    "window-minimize",
+    "window-maximize",
+    "window-hide",
+    "window-start-dragging",
+    "shell-open",
+] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 tauri-plugin-single-instance = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
@@ -23,6 +33,12 @@ sentry-tauri = "0.2.0"
 auto-launch = "0.4.0"
 dunce = "1.0.4"
 tauri-plugin-store = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
+log = "0.4.20"
+tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "dev" }
+salah = "0.7.0"
+chrono = "0.4.26"
+config = "0.13.3"
+
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem
