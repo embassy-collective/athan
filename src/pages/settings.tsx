@@ -17,8 +17,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Switch } from '../components/atoms/switch';
 import VolumeLevel from '../components/atoms/volume-level';
 import Layout from '../components/templates/layout';
+import { useTheme } from '@/providers/theme-provider';
+import { unstable_useBlocker as useBlocker } from 'react-router-dom';
 
 const SettingsForm = () => {
+  const { setPreviewTheme } = useTheme();
+
+  useBlocker(() => {
+    setPreviewTheme(undefined);
+    return false;
+  });
+
   const { t, i18n } = useTranslation();
   const themeOptions = [
     {
@@ -142,7 +151,13 @@ const SettingsForm = () => {
                   >
                     {themeOptions.map((option) => (
                       <div className="flex items-center space-x-2" key={option.value}>
-                        <RadioGroupItem value={option.value} id={option.value} />
+                        <RadioGroupItem
+                          value={option.value}
+                          id={option.value}
+                          onClick={() => {
+                            setPreviewTheme(option.value as Settings['theme'] | undefined);
+                          }}
+                        />
                         <Label htmlFor={option.value}>{option.label}</Label>
                       </div>
                     ))}
@@ -210,7 +225,7 @@ const SettingsForm = () => {
 
               <div className="flex flex-row justify-end w-full gap-4">
                 <div className="flex justify-start w-1/2 gap-2">
-                  <Button variant={'default'} onClick={() => handleSubmit()} disabled={!dirty}>
+                  <Button variant={'default'} onClick={() => handleSubmit()} disabled={onboarding && !dirty}>
                     {t('Save')}
                   </Button>
                   <Button variant={'link'} onClick={() => handleReset()}>
