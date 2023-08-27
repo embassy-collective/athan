@@ -10,8 +10,10 @@ import { useNavigate } from 'react-router-dom';
 import NextPrayer from '../components/atoms/next-prayer';
 import Prayers from '../components/molecules/prayers';
 import Layout from '../components/templates/layout';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
+  const { t } = useTranslation();
   const { today, prayerTimes, tomorrowPrayerTimes, nextPrayer } = usePrayerTimes();
   const { twentyFourHourTime, onboarding } = useStore();
   const todayPrayers = Object.entries(prayerTimes)
@@ -43,7 +45,7 @@ const Home = () => {
             <>
               <NextPrayer nextPrayerTime={nextPrayer.date} />
               <h1 className="text-[112px]">
-                <span className="font-black capitalize">{nextPrayer.prayer}</span>{' '}
+                <span className="font-black capitalize">{t(nextPrayer.prayer as string)}</span>{' '}
                 {formatDate(nextPrayer.date, twentyFourHourTime)}
               </h1>
             </>
@@ -56,10 +58,10 @@ const Home = () => {
         </div>
       </div>
       <Prayers prayers={todayPrayers} className="mt-10" nextPrayer={nextPrayer.isToday ? nextPrayer.prayer : null}>
-        Today
+        {t('Today')}
       </Prayers>
       <Prayers prayers={tomorrowPrayers} className="mt-10" nextPrayer={!nextPrayer.isToday ? nextPrayer.prayer : null}>
-        Tomorrow
+        {t('Tomorrow')}
       </Prayers>
     </Layout>
   );

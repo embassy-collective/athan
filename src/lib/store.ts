@@ -18,6 +18,7 @@ export interface GeoLocation {
 interface State {
   onboarding: boolean;
   location: GeoLocation;
+  language: string;
   notifications: Record<PrayerKey, boolean>;
   volume: Settings['volume'];
   twentyFourHourTime: Settings['time'];
@@ -27,6 +28,7 @@ interface State {
   remindBefore: Settings['remindBefore'];
   toggleNotification: (key: PrayerKey) => void;
   setLocation: (location: GeoLocation) => void;
+  setLanguage: (language: string) => void;
   applySettings: (settings: Settings) => void;
   setTheme: (theme: Settings['theme']) => void;
   setOnboarding: (onboarding: boolean) => void;
@@ -42,6 +44,7 @@ export const useStore = create<State>()(
       gamify: false,
       remindBefore: 5,
       agent: AGENTS[0].value,
+      language: 'en',
       location: {
         coords: {
           latitude: 5.3698,
@@ -69,7 +72,11 @@ export const useStore = create<State>()(
         set(() => ({
           location: location
         })),
-      applySettings: (settings: Settings) =>
+      setLanguage: (language: string) =>
+        set(() => ({
+          language: language
+        })),
+      applySettings: (settings: Settings) =>{
         set((state) => ({
           ...state,
           volume: settings.volume,
@@ -77,9 +84,11 @@ export const useStore = create<State>()(
           agent: settings.agent,
           theme: settings.theme,
           location: settings.location,
+          language: settings.language,
           gamify: settings.gamify,
           remindBefore: settings.remindBefore
-        })),
+        }))
+      },
       setTheme: (theme: Settings['theme']) =>
         set(() => ({
           theme: theme
