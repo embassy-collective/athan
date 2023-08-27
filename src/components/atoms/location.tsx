@@ -52,8 +52,7 @@ const Location = ({ value, onValueChange, errors }: LocationProps) => {
     }
   };
 
-  const countries = Country.getAllCountries().filter( (item) => item.name != `Western Sahara` );
-  console.log(countries);
+  const countries = Country.getAllCountries().filter((country) => country.name !== `Western Sahara`);
   const selectedCountry = useMemo(() => countries.find((country) => country.name === value.country), [value.country]);
 
   const cityId = (city: ICity) => `${city.name}#${city.longitude}#${city.latitude}`;
