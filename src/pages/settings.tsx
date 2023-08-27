@@ -203,7 +203,7 @@ const SettingsForm = () => {
 
               <div className="flex flex-row justify-end w-full gap-4">
                 <div className="flex justify-start w-1/2 gap-2">
-                  <Button variant={'default'} onClick={() => handleSubmit()} disabled={!dirty}>
+                  <Button variant={'default'} onClick={() => handleSubmit()} disabled={onboarding && !dirty}>
                     Save
                   </Button>
                   <Button variant={'link'} onClick={() => handleReset()}>
