@@ -4,7 +4,6 @@ import { formatDate } from '@/lib/date';
 import { useStore } from '@/lib/store';
 import { cn } from '@/lib/styles';
 import { PrayerKey, Prayer as PrayerType } from '@/types/prayer';
-import { isPermissionGranted, requestPermission, sendNotification } from '@tauri-apps/api/notification';
 import { useTranslation } from 'react-i18next';
 import PrayerIcon from './prayer-icon';
 
@@ -15,22 +14,6 @@ const Prayer = ({ prayer, isActive }: { prayer: PrayerType; isActive?: boolean }
   const onClick = async () => {
     // Keep this
     toggleNotification(prayer.id as PrayerKey);
-
-    // Remove this later
-    let permissionGranted = await isPermissionGranted();
-
-    if (!permissionGranted) {
-      const permission = await requestPermission();
-      permissionGranted = permission === 'granted';
-    }
-
-    if (permissionGranted) {
-      sendNotification({
-        title: 'Athan time',
-        body: `It's time for ${prayer.name} prayer!`
-      });
-      // playAthan();
-    }
   };
   const notificationEnabled = notifications[prayer.id as PrayerKey];
 

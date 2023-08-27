@@ -4,9 +4,12 @@ import { useToast } from '@/hooks/useToast';
 import { AGENTS } from '@/lib/config/agents';
 import { useStore } from '@/lib/store';
 import { Settings, settingsSchema } from '@/lib/validation';
+import { useTheme } from '@/providers/theme-provider';
+import { isPermissionGranted, requestPermission } from '@tauri-apps/api/notification';
 import { Formik } from 'formik';
 import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { unstable_useBlocker as useBlocker } from 'react-router-dom';
 import { Button } from '../components/atoms/button';
 import { Label } from '../components/atoms/label';
 import LanguageSelector from '../components/atoms/language-selector';
@@ -17,8 +20,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Switch } from '../components/atoms/switch';
 import VolumeLevel from '../components/atoms/volume-level';
 import Layout from '../components/templates/layout';
-import { useTheme } from '@/providers/theme-provider';
-import { unstable_useBlocker as useBlocker } from 'react-router-dom';
 
 const SettingsForm = () => {
   const { setPreviewTheme } = useTheme();
@@ -89,12 +90,23 @@ const SettingsForm = () => {
     [agent, twentyFourHourTime, volume]
   );
 
+  const checkPermissions = async () => {
+    // Remove this later
+    let permissionGranted = await isPermissionGranted();
+
+    if (!permissionGranted) {
+      const permission = await requestPermission();
+      permissionGranted = permission === 'granted';
+    }
+  };
+
   useEffect(() => {
     if (!onboarding) {
       toast({
         title: t('Welcome to Athan Time'),
         description: t('Please configure your location to get started')
       });
+      checkPermissions();
     }
   }, [onboarding]);
 

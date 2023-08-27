@@ -55,7 +55,7 @@ const Location = ({ value, onValueChange, errors }: LocationProps) => {
   const countries = Country.getAllCountries();
   const selectedCountry = useMemo(() => countries.find((country) => country.name === value.country), [value.country]);
 
-  const cityId = (city: ICity) => `${city.name}-${city.longitude}-${city.latitude}`;
+  const cityId = (city: ICity) => `${city.name}#${city.longitude}#${city.latitude}`;
 
   const cities = useMemo(
     () => (selectedCountry?.isoCode ? City.getCitiesOfCountry(selectedCountry?.isoCode) ?? [] : []),
@@ -63,7 +63,7 @@ const Location = ({ value, onValueChange, errors }: LocationProps) => {
   );
 
   const cityById = (id: string) => {
-    const [name, longitude, latitude] = id.split('-');
+    const [name, longitude, latitude] = id.split('#');
     return cities.find((city) => city.name === name && city.longitude === longitude && city.latitude === latitude);
   };
 
@@ -105,6 +105,7 @@ const Location = ({ value, onValueChange, errors }: LocationProps) => {
             onChange={(value: Option) => {
               const city = cityById(value.value);
               if (!city) return;
+
               onValueChange({
                 country: selectedCountry.name,
                 city: city?.name,
