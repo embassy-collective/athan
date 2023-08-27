@@ -8,9 +8,9 @@ use tauri::{utils::platform::current_exe, Manager, RunEvent, WindowEvent};
 
 pub mod app;
 pub mod athan;
-pub mod config;
 
-fn main() {
+#[tokio::main] // Initialize the Tokio runtime
+async fn main() {
     configure_sentry();
 
     let app = tauri::Builder::default()

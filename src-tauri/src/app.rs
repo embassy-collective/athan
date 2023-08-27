@@ -1,5 +1,8 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+use std::sync::Arc;
+
+use log::debug;
 use serde::Serialize;
 use tauri::{
     CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem,
@@ -8,8 +11,7 @@ use tauri_plugin_store::StoreBuilder;
 use window_shadows::set_shadow;
 use window_vibrancy::{apply_blur, apply_vibrancy, NSVisualEffectMaterial};
 
-use crate::athan::monitor_athan_times;
-use crate::config::load_config;
+use crate::athan::start_timer;
 
 #[derive(Clone, Serialize)]
 pub struct Payload {
@@ -24,9 +26,8 @@ pub fn show_window(app: &tauri::AppHandle) {
 }
 
 pub fn configure_sentry() {
-    let config = load_config();
     let client = sentry_tauri::sentry::init((
-        config.get_string("sentry_dsn").unwrap(),
+        "https://f11c0825c73a84b52b1333cbaa892c33@o84215.ingest.sentry.io/4505771926880256",
         sentry_tauri::sentry::ClientOptions {
             release: sentry_tauri::sentry::release_name!(),
             ..Default::default()
@@ -86,9 +87,16 @@ pub fn setup_app() -> impl Fn(&mut tauri::App) -> Result<(), Box<dyn std::error:
         let settings_path = data_path.join(".settings.json");
 
         // Fetch the storage
-        let mut store = StoreBuilder::new(app.handle(), settings_path).build();
+        let store = StoreBuilder::new(app.handle(), settings_path).build();
+        let store_mutex = Arc::new(tokio::sync::Mutex::new(store));
+        let resource_path = app
+            .path_resolver()
+            .resolve_resource("")
+            .expect("failed to resolve resource");
+        debug!("Resource path: {:?}", resource_path);
 
-        monitor_athan_times(&mut store);
+        start_timer(store_mutex, resource_path);
+
         Ok(())
     }
 }
