@@ -3,12 +3,14 @@ import { useStore } from '@/lib/store';
 import { cn } from '@/lib/styles';
 import { random } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import SvgIcon from '../components/atoms/svg-icon';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../components/atoms/tooltip';
 import Layout from '../components/templates/layout';
 const BOX_SIZE = 224;
 
 const Tasbih = () => {
+  const { t } = useTranslation();
   const playground = useRef<HTMLDivElement | null>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [position, setPosition] = useState({ x: BOX_SIZE / 2, y: BOX_SIZE / 2 });
@@ -67,7 +69,7 @@ const Tasbih = () => {
       <div className="flex flex-row h-full mr-20">
         <div className="flex flex-col justify-center flex-grow gap-8">
           <div className="flex flex-row items-center gap-8">
-            <h1 className="text-[48px] text-accent font-semibold">Tasbih</h1>
+            <h1 className="text-[48px] text-accent font-semibold rtl:font-arabic">{t('Tasbih')}</h1>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>

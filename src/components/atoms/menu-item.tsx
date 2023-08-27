@@ -14,10 +14,14 @@ const MenuItem = ({ children, to, className }: MenuItemProps) => {
     <NavLink
       to={to}
       className={({ isActive }) =>
-        cn(className, 'flex h-12 items-center px-8 pl-4 border-l-4 border-transparent hover:border-accent', {
-          'border-accent': isActive,
-          'border-transparent': !isActive
-        })
+        cn(
+          className,
+          'rtl:font-arabic flex h-12 items-center px-8 pl-4 border-l-4 rtl:border-r-4 rtl:border-l-0   border-transparent hover:border-accent',
+          {
+            'border-accent': isActive,
+            'border-transparent': !isActive
+          }
+        )
       }
     >
       {children}

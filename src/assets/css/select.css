@@ -1,5 +1,5 @@
 .fast-option {
-    @apply text-primary overflow-hidden !important;
+    @apply text-primary overflow-hidden rtl:font-arabic !important;
 }
 
 .fast-option:hover {

@@ -16,7 +16,7 @@ const Prayers = ({
 }) => {
   return (
     <div className={cn(className)}>
-      <p className="mb-4">{children}</p>
+      <p className="mb-4 rtl:font-arabic">{children}</p>
       <div className="grid grid-cols-6 gap-2">
         {prayers.map((prayer, index) => (
           <Prayer prayer={prayer} key={index} isActive={prayer.id === nextPrayer} />
