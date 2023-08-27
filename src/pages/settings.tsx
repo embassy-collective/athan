@@ -15,8 +15,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Switch } from '../components/atoms/switch';
 import VolumeLevel from '../components/atoms/volume-level';
 import Layout from '../components/templates/layout';
+import { useTheme } from '@/providers/theme-provider';
+import { unstable_useBlocker as useBlocker } from 'react-router-dom';
 
 const SettingsForm = () => {
+  const { setPreviewTheme } = useTheme();
+
+  useBlocker(() => {
+    setPreviewTheme(undefined);
+    return false;
+  });
+
   const themeOptions = [
     {
       label: 'System',
@@ -131,7 +140,13 @@ const SettingsForm = () => {
                   >
                     {themeOptions.map((option) => (
                       <div className="flex items-center space-x-2" key={option.value}>
-                        <RadioGroupItem value={option.value} id={option.value} />
+                        <RadioGroupItem
+                          value={option.value}
+                          id={option.value}
+                          onClick={() => {
+                            setPreviewTheme(option.value as Settings['theme'] | undefined);
+                          }}
+                        />
                         <Label htmlFor={option.value}>{option.label}</Label>
                       </div>
                     ))}
