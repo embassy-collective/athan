@@ -53,9 +53,15 @@ const Location = ({ value, onValueChange, errors }: LocationProps) => {
   };
 
   const countries = Country.getAllCountries();
-  const selectedCountry = useMemo(() => countries.find((country) => country.name === value.country), [value.country]);
 
-  const cityId = (city: ICity) => `${city.name}#${city.longitude}#${city.latitude}`;
+  const filteredCountries = countries.filter((country) => country.name !== 'Western Sahara');
+
+  const selectedCountry = useMemo(
+    () => filteredCountries.find((country) => country.name === value.country),
+    [value.country]
+  );
+
+  const cityId = (city: ICity) => `${city.name}-${city.longitude}-${city.latitude}`;
 
   const cities = useMemo(
     () => (selectedCountry?.isoCode ? City.getCitiesOfCountry(selectedCountry?.isoCode) ?? [] : []),
@@ -63,7 +69,7 @@ const Location = ({ value, onValueChange, errors }: LocationProps) => {
   );
 
   const cityById = (id: string) => {
-    const [name, longitude, latitude] = id.split('#');
+    const [name, longitude, latitude] = id.split('-');
     return cities.find((city) => city.name === name && city.longitude === longitude && city.latitude === latitude);
   };
 
@@ -80,7 +86,7 @@ const Location = ({ value, onValueChange, errors }: LocationProps) => {
           value={selectedCountry ? { value: selectedCountry.isoCode, label: selectedCountry?.name } : undefined}
           className="w-56"
           onChange={(value: Option) => {
-            const country = countries.find((country) => country.isoCode === value.value);
+            const country = filteredCountries.find((country) => country.isoCode === value.value);
             if (!country) return;
             const city = City.getCitiesOfCountry(country?.isoCode)?.[0];
             onValueChange({
@@ -92,7 +98,7 @@ const Location = ({ value, onValueChange, errors }: LocationProps) => {
               }
             });
           }}
-          options={countries.map((country) => ({ value: country.isoCode, label: country.name }))}
+          options={filteredCountries.map((country) => ({ value: country.isoCode, label: country.name }))}
         />
         {errors?.country && <p className="text-red-400">Invalid city.</p>}
       </div>
@@ -105,7 +111,6 @@ const Location = ({ value, onValueChange, errors }: LocationProps) => {
             onChange={(value: Option) => {
               const city = cityById(value.value);
               if (!city) return;
-
               onValueChange({
                 country: selectedCountry.name,
                 city: city?.name,
