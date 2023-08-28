@@ -18,8 +18,6 @@ pub(crate) struct Coords {
 #[derive(Deserialize, Debug)]
 pub(crate) struct Location {
     pub(crate) coords: Coords,
-    city: String,
-    country: String,
 }
 #[derive(Deserialize, Debug)]
 pub(crate) struct Notifications {
@@ -40,7 +38,6 @@ pub(crate) struct AthanSettings {
 #[derive(Deserialize, Debug)]
 pub(crate) struct State {
     pub(crate) state: AthanSettings,
-    version: u8,
 }
 
 pub fn start_timer(store: Arc<Mutex<Store<Wry>>>, resources_path: PathBuf) {
@@ -125,7 +122,6 @@ pub fn check_athan_time(store: &mut Store<Wry>, resources_path: PathBuf) {
     debug!("Time left before remind: {}", time_remaining);
 
     // Every minute, check if the current time is the time to remind of prayer
-
     if hours_left == 0 && time_remaining == 0 {
         debug!("{} minutes before {}",remind_bar_before, next_prayer.name().unwrap());
 
@@ -137,7 +133,6 @@ pub fn check_athan_time(store: &mut Store<Wry>, resources_path: PathBuf) {
     }
 
     // Every minute, check if the current time is one of the prayer times
-
     if hours_left == 0 && minutes_left <= 1 {
         debug!("Time for {}", next_prayer.name().unwrap());
 
