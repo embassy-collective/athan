@@ -79,3 +79,15 @@ All the design and development work was streamed live on Twitch. You can find th
 
 - Stormix_co: https://www.twitch.tv/videos/1904809583
 - Maadlou_: https://www.twitch.tv/videos/1904581890
+
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
