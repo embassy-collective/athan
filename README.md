@@ -7,6 +7,10 @@
 
 Athan time is a simple app that displays the prayer times for the day and notifies the user when it is time to pray. It is built using [Tauri](https://tauri.studio/), a framework for building desktop apps using web technologies.
 
+P.S: The application was written with 0 knowledge about Rust or Tauri. Everything was learnt live on stream.
+
+P.S2: [Maadlou](http://maadlou.com/) designed the full UI live as well using Figma & Adobe Illustrator
+
 ## Development
 
 ### Prerequisites
@@ -48,6 +52,15 @@ pnpm tauri dev
 
 All the design and development work was streamed live on Twitch. You can find the VODs here:
 
+### Day 6 (last day)
+
+- Stormix_co: [https://www.twitch.tv/videos/1907325837](https://www.twitch.tv/videos/1910017987)
+  
+### Day 5
+ 
+- Stormix_co (Part1): coming soon
+- Stormix_co (Part2): https://www.twitch.tv/videos/1909324299
+  
 ### Day 4
 
 - Stormix_co: https://www.twitch.tv/videos/1907325837
