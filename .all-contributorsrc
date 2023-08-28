@@ -63,6 +63,17 @@
         "code",
         "translation"
       ]
+    },
+    {
+      "login": "Maadlou",
+      "name": "Mohammed Loulou",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20651794?v=4",
+      "profile": "https://github.com/Maadlou",
+      "contributions": [
+        "design",
+        "ideas",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
