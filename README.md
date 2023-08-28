@@ -55,15 +55,19 @@ pnpm tauri dev
 
 All the design and development work was streamed live on Twitch. You can find the VODs here:
 
-### Day 6 (last day)
+### Day 7 (last day)
 
 - Stormix_co: [https://www.twitch.tv/videos/1907325837](https://www.twitch.tv/videos/1910017987)
   
-### Day 5
+### Day 6
  
 - Stormix_co (Part1): coming soon
 - Stormix_co (Part2): https://www.twitch.tv/videos/1909324299
-  
+
+### Day 5
+
+- Stormix_co: https://www.twitch.tv/videos/1908322585
+
 ### Day 4
 
 - Stormix_co: https://www.twitch.tv/videos/1907325837
