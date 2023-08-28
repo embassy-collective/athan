@@ -1,0 +1,27 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "Sandukhan98",
+      "name": "Sandukhan98",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46085712?v=4",
+      "profile": "https://github.com/Sandukhan98",
+      "contributions": [
+        "code",
+        "translation"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "athan",
+  "projectOwner": "The-Embassy-Collective"
+}
