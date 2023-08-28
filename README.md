@@ -1,4 +1,7 @@
 # Athan Time
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![publish](https://github.com/The-Embassy-Collective/athan/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/The-Embassy-Collective/athan/actions/workflows/release.yml)
 [![test-on-pr](https://github.com/The-Embassy-Collective/athan/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/The-Embassy-Collective/athan/actions/workflows/test.yml)
@@ -84,6 +87,20 @@ All the design and development work was streamed live on Twitch. You can find th
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://fakhreeddine.dev/"><img src="https://avatars.githubusercontent.com/u/114300398?v=4?s=100" width="100px;" alt="Mohamed Amine Fakhre-Eddine"/><br /><sub><b>Mohamed Amine Fakhre-Eddine</b></sub></a><br /><a href="https://github.com/The-Embassy-Collective/athan/issues?q=author%3AaL0NEW0LF" title="Bug reports">🐛</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 
