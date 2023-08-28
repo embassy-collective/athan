@@ -1,6 +1,6 @@
 # Athan Time
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![publish](https://github.com/The-Embassy-Collective/athan/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/The-Embassy-Collective/athan/actions/workflows/release.yml)
@@ -92,8 +92,9 @@ All the design and development work was streamed live on Twitch. You can find th
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Blackarrow299"><img src="https://avatars.githubusercontent.com/u/40956494?v=4?s=100" width="100px;" alt="yassine goumni"/><br /><sub><b>yassine goumni</b></sub></a><br /><a href="https://github.com/The-Embassy-Collective/athan/issues?q=author%3ABlackarrow299" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://fakhreeddine.dev/"><img src="https://avatars.githubusercontent.com/u/114300398?v=4?s=100" width="100px;" alt="Mohamed Amine Fakhre-Eddine"/><br /><sub><b>Mohamed Amine Fakhre-Eddine</b></sub></a><br /><a href="https://github.com/The-Embassy-Collective/athan/issues?q=author%3AaL0NEW0LF" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Blackarrow299"><img src="https://avatars.githubusercontent.com/u/40956494?v=4?s=100" width="100px;" alt="yassine goumni"/><br /><sub><b>yassine goumni</b></sub></a><br /><a href="https://github.com/The-Embassy-Collective/athan/issues?q=author%3ABlackarrow299" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Youssefz0"><img src="https://avatars.githubusercontent.com/u/139799634?v=4?s=100" width="100px;" alt="Youssef Ab"/><br /><sub><b>Youssef Ab</b></sub></a><br /><a href="https://github.com/The-Embassy-Collective/athan/issues?q=author%3AYoussefz0" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>
