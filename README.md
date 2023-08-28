@@ -57,7 +57,7 @@ All the design and development work was streamed live on Twitch. You can find th
 
 ### Day 7 (last day)
 
-- Stormix_co: [https://www.twitch.tv/videos/1907325837](https://www.twitch.tv/videos/1910017987)
+- Stormix_co: https://www.twitch.tv/videos/1910017987
   
 ### Day 6
  
