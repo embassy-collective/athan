@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "Youssefz0",
+      "name": "Youssef Ab",
+      "avatar_url": "https://avatars.githubusercontent.com/u/139799634?v=4",
+      "profile": "https://github.com/Youssefz0",
+      "contributions": [
+        "bug"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "athan",
+  "projectOwner": "The-Embassy-Collective"
+}
