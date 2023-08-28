@@ -124,9 +124,21 @@ pub fn check_athan_time(store: &mut Store<Wry>, resources_path: PathBuf) {
     let time_remaining = minutes_left.abs_diff(remind_bar_before);
     debug!("Time left before remind: {}", time_remaining);
 
+    // Every minute, check if the current time is the time to remind of prayer
+
+    if hours_left == 0 && time_remaining == 0 {
+        debug!("{} minutes before {}",remind_bar_before, next_prayer.name().unwrap());
+
+        Notification::new("net.thembassy.athan")
+            .title("Athan Time")
+            .body(format!("{} minutes before {}",remind_bar_before, next_prayer.name().unwrap()))
+            .show()
+            .expect("Failed to show notification.");
+    }
+
     // Every minute, check if the current time is one of the prayer times
 
-    if hours_left == 0 && time_remaining <= 1 {
+    if hours_left == 0 && minutes_left <= 1 {
         debug!("Time for {}", next_prayer.name().unwrap());
 
         Notification::new("net.thembassy.athan")
