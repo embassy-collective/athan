@@ -8,11 +8,20 @@
   "commitConvention": "angular",
   "contributors": [
     {
+      "login": "aL0NEW0LF",
+      "name": "Mohamed Amine Fakhre-Eddine",
+      "avatar_url": "https://avatars.githubusercontent.com/u/114300398?v=4",
+      "profile": "https://fakhreeddine.dev/",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
       "login": "Blackarrow299",
       "name": "yassine goumni",
       "avatar_url": "https://avatars.githubusercontent.com/u/40956494?v=4",
       "profile": "https://github.com/Blackarrow299",
-      "contributions": [
+     "contributions": [
         "bug"
       ]
     }

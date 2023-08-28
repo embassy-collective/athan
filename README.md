@@ -93,6 +93,7 @@ All the design and development work was streamed live on Twitch. You can find th
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Blackarrow299"><img src="https://avatars.githubusercontent.com/u/40956494?v=4?s=100" width="100px;" alt="yassine goumni"/><br /><sub><b>yassine goumni</b></sub></a><br /><a href="https://github.com/The-Embassy-Collective/athan/issues?q=author%3ABlackarrow299" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://fakhreeddine.dev/"><img src="https://avatars.githubusercontent.com/u/114300398?v=4?s=100" width="100px;" alt="Mohamed Amine Fakhre-Eddine"/><br /><sub><b>Mohamed Amine Fakhre-Eddine</b></sub></a><br /><a href="https://github.com/The-Embassy-Collective/athan/issues?q=author%3AaL0NEW0LF" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>
