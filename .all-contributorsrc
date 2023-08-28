@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "aL0NEW0LF",
+      "name": "Mohamed Amine Fakhre-Eddine",
+      "avatar_url": "https://avatars.githubusercontent.com/u/114300398?v=4",
+      "profile": "https://fakhreeddine.dev/",
+      "contributions": [
+        "bug"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "athan",
+  "projectOwner": "The-Embassy-Collective"
+}
