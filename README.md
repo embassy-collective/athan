@@ -1,6 +1,6 @@
 # Athan Time
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![publish](https://github.com/The-Embassy-Collective/athan/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/The-Embassy-Collective/athan/actions/workflows/release.yml)
@@ -98,6 +98,7 @@ All the design and development work was streamed live on Twitch. You can find th
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/haythamchanouni"><img src="https://avatars.githubusercontent.com/u/117861780?v=4?s=100" width="100px;" alt="Chanouni Haytham"/><br /><sub><b>Chanouni Haytham</b></sub></a><br /><a href="https://github.com/The-Embassy-Collective/athan/commits?author=haythamchanouni" title="Code">💻</a> <a href="#translation-haythamchanouni" title="Translation">🌍</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/smehdii"><img src="https://avatars.githubusercontent.com/u/22805576?v=4?s=100" width="100px;" alt="SIDDIK MEHDI "/><br /><sub><b>SIDDIK MEHDI </b></sub></a><br /><a href="https://github.com/The-Embassy-Collective/athan/commits?author=smehdii" title="Code">💻</a> <a href="#ideas-smehdii" title="Ideas, Planning, & Feedback">🤔</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Sandukhan98"><img src="https://avatars.githubusercontent.com/u/46085712?v=4?s=100" width="100px;" alt="Sandukhan98"/><br /><sub><b>Sandukhan98</b></sub></a><br /><a href="https://github.com/The-Embassy-Collective/athan/commits?author=Sandukhan98" title="Code">💻</a> <a href="#translation-Sandukhan98" title="Translation">🌍</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Maadlou"><img src="https://avatars.githubusercontent.com/u/20651794?v=4?s=100" width="100px;" alt="Mohammed Loulou"/><br /><sub><b>Mohammed Loulou</b></sub></a><br /><a href="#design-Maadlou" title="Design">🎨</a> <a href="#ideas-Maadlou" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/The-Embassy-Collective/athan/commits?author=Maadlou" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
