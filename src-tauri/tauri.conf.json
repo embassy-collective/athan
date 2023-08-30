@@ -16,7 +16,7 @@
       "iconAsTemplate": true
     },
     "allowlist": {
-      "all": true,
+      "all": false,
       "shell": {
         "all": false,
         "open": true
