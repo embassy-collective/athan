@@ -26,77 +26,79 @@ export function TitleBar() {
   }, []);
 
   return (
-    !fullscreen && (
-      <div data-tauri-drag-region className={classes.titlebar} id="titlebar">
-        <div>
-          <Menu shadow="md" width={200}>
-            <Menu.Target>
-              <UnstyledButton style={{ cursor: 'default' }}></UnstyledButton>
-            </Menu.Target>
-            <Menu.Dropdown>
-              <Menu.Item onClick={() => appWindow.minimize()} icon={<VscChromeMinimize size={14} />}>
-                {t('Minimize')}
-              </Menu.Item>
-              {maximized ? (
-                <Menu.Item onClick={() => appWindow.toggleMaximize()} icon={<VscChromeRestore size={14} />}>
-                  {t('Restore Down')}
+    <>
+      {!fullscreen && (
+        <div data-tauri-drag-region className={classes.titlebar} id="titlebar">
+          <div>
+            <Menu shadow="md" width={200}>
+              <Menu.Target>
+                <UnstyledButton style={{ cursor: 'default' }}></UnstyledButton>
+              </Menu.Target>
+              <Menu.Dropdown>
+                <Menu.Item onClick={() => appWindow.minimize()} icon={<VscChromeMinimize size={14} />}>
+                  {t('Minimize')}
                 </Menu.Item>
-              ) : (
-                <Menu.Item onClick={() => appWindow.toggleMaximize()} icon={<VscChromeMaximize size={14} />}>
-                  {t('Maximize')}
+                {maximized ? (
+                  <Menu.Item onClick={() => appWindow.toggleMaximize()} icon={<VscChromeRestore size={14} />}>
+                    {t('Restore Down')}
+                  </Menu.Item>
+                ) : (
+                  <Menu.Item onClick={() => appWindow.toggleMaximize()} icon={<VscChromeMaximize size={14} />}>
+                    {t('Maximize')}
+                  </Menu.Item>
+                )}
+                <Menu.Divider />
+                <Menu.Item
+                  onClick={() => appWindow.hide()}
+                  icon={<VscChromeClose size={14} />}
+                  rightSection={
+                    <Text weight="bold" size="xs">
+                      Alt + F4
+                    </Text>
+                  }
+                >
+                  {t('Close')}
                 </Menu.Item>
-              )}
-              <Menu.Divider />
-              <Menu.Item
-                onClick={() => appWindow.hide()}
-                icon={<VscChromeClose size={14} />}
-                rightSection={
-                  <Text weight="bold" size="xs">
-                    Alt + F4
-                  </Text>
-                }
-              >
-                {t('Close')}
-              </Menu.Item>
-            </Menu.Dropdown>
-          </Menu>
-        </div>
+              </Menu.Dropdown>
+            </Menu>
+          </div>
 
-        <div>
-          <div
-            title={t('Minimize')}
-            className={`${classes.titlebarButton} hover:bg-foreground active:bg-foreground`}
-            onClick={() => appWindow.minimize()}
-          >
-            <VscChromeMinimize className={classes.verticalAlign} />
-          </div>
-          {maximized ? (
+          <div>
             <div
-              title={t('Restore Down')}
+              title={t('Minimize')}
               className={`${classes.titlebarButton} hover:bg-foreground active:bg-foreground`}
-              onClick={() => appWindow.toggleMaximize()}
+              onClick={() => appWindow.minimize()}
             >
-              <VscChromeRestore className={classes.verticalAlign} />
+              <VscChromeMinimize className={classes.verticalAlign} />
             </div>
-          ) : (
+            {maximized ? (
+              <div
+                title={t('Restore Down')}
+                className={`${classes.titlebarButton} hover:bg-foreground active:bg-foreground`}
+                onClick={() => appWindow.toggleMaximize()}
+              >
+                <VscChromeRestore className={classes.verticalAlign} />
+              </div>
+            ) : (
+              <div
+                title={t('Maximize')}
+                className={`${classes.titlebarButton} hover:bg-foreground active:bg-foreground`}
+                onClick={() => appWindow.toggleMaximize()}
+              >
+                <VscChromeMaximize className={classes.verticalAlign} />
+              </div>
+            )}
             <div
-              title={t('Maximize')}
-              className={`${classes.titlebarButton} hover:bg-foreground active:bg-foreground`}
-              onClick={() => appWindow.toggleMaximize()}
+              title={t('Close')}
+              className={`${classes.titlebarButton} hover:bg-foreground active:bg-red-500`}
+              onClick={() => appWindow.hide()}
             >
-              <VscChromeMaximize className={classes.verticalAlign} />
+              <VscChromeClose className={classes.verticalAlign} />
             </div>
-          )}
-          <div
-            title={t('Close')}
-            className={`${classes.titlebarButton} hover:bg-foreground active:bg-red-500`}
-            onClick={() => appWindow.hide()}
-          >
-            <VscChromeClose className={classes.verticalAlign} />
           </div>
         </div>
-      </div>
-    )
+      )}
+    </>
   );
 }
 
