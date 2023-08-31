@@ -94,6 +94,9 @@ dependencies:
   react-virtualized:
     specifier: ^9.22.5
     version: 9.22.5(patch_hash=6lnczxfm4yu3vqrs6lgfa2muti)(react-dom@18.2.0)(react@18.2.0)
+  use-interval:
+    specifier: ^1.4.0
+    version: 1.4.0(react@18.2.0)
   yup:
     specifier: ^1.2.0
     version: 1.2.0
@@ -4563,6 +4566,15 @@ packages:
       '@types/react': 18.2.15
       react: 18.2.0
       tslib: 2.6.2
+    dev: false
+
+  /use-interval@1.4.0(react@18.2.0):
+    resolution: {integrity: sha512-1betIJun2rXKLxa30AFOBZCeZhsBJoJ/3+gkCeYbJ63lAR//EnAb1NjNeFqzgqeM7zQfR76rrCUaA8DvfgoOpA==}
+    engines: {node: '>=8', npm: '>=5'}
+    peerDependencies:
+      react: '>=16.8.0 || ^17'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /use-isomorphic-layout-effect@1.1.2(@types/react@18.2.15)(react@18.2.0):

@@ -38,6 +38,7 @@
     "react-router-dom": "^6.15.0",
     "react-select-virtualized": "^5.5.0",
     "react-virtualized": "^9.22.5",
+    "use-interval": "^1.4.0",
     "yup": "^1.2.0",
     "zustand": "^4.4.1"
   },
