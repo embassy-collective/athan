@@ -25,7 +25,7 @@ export function TitleBar() {
           <div>
             <div
               title={t('Minimize')}
-              className={`duration-200 inline-flex justify-center items-center h-8 w-12 fill-[#D9D9D9] dark:fill-[#181818] hover:bg-foreground active:bg-foreground`}
+              className={`duration-200 inline-flex justify-center items-center h-8 w-12 fill-white dark:fill-black hover:bg-foreground active:bg-foreground`}
               onClick={() => appWindow.minimize()}
             >
               <MinusIcon className="align-middle" />
@@ -33,7 +33,7 @@ export function TitleBar() {
             {maximized ? (
               <div
                 title={t('Restore Down')}
-                className={`uration-200 inline-flex justify-center items-center h-8 w-12 fill-[#D9D9D9] dark:fill-[#181818] hover:bg-foreground active:bg-foreground`}
+                className={`uration-200 inline-flex justify-center items-center h-8 w-12 fill-white dark:fill-black hover:bg-foreground active:bg-foreground`}
                 onClick={() => appWindow.toggleMaximize()}
               >
                 <CopyIcon className="align-middle" />
@@ -41,7 +41,7 @@ export function TitleBar() {
             ) : (
               <div
                 title={t('Maximize')}
-                className={`uration-200 inline-flex justify-center items-center h-8 w-12 fill-[#D9D9D9] dark:fill-[#181818] hover:bg-foreground active:bg-foreground`}
+                className={`uration-200 inline-flex justify-center items-center h-8 w-12 fill-white dark:fill-black hover:bg-foreground active:bg-foreground`}
                 onClick={() => appWindow.toggleMaximize()}
               >
                 <SquareIcon className="align-middle" />
@@ -49,7 +49,7 @@ export function TitleBar() {
             )}
             <div
               title={t('Close')}
-              className={`uration-200 inline-flex justify-center items-center h-8 w-12 fill-[#D9D9D9] dark:fill-[#181818] hover:bg-foreground active:bg-red-500`}
+              className={`uration-200 inline-flex justify-center items-center h-8 w-12 fill-white dark:fill-black hover:bg-foreground active:bg-red-500`}
               onClick={() => appWindow.hide()}
             >
               <Cross1Icon className="align-middle" />
