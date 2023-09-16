@@ -133,7 +133,7 @@ pub fn check_athan_time(store: &mut Store<Wry>, resources_path: PathBuf) {
     }
 
     // Every minute, check if the current time is one of the prayer times
-    if hours_left == 0 && minutes_left <= 1 {
+    if hours_left == 0 && minutes_left == 1 {
         debug!("Time for {}", next_prayer.name().unwrap());
 
         Notification::new("net.thembassy.athan")
